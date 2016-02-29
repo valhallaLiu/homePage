@@ -1,0 +1,575 @@
+html {
+  color: #000;
+  background: #ffffff;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset,
+img {
+  border: 0;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+ol,
+ul {
+  list-style: none;
+}
+caption,
+th {
+  text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+q:before,
+q:after {
+  content: '';
+}
+abbr,
+acronym {
+  border: 0;
+  font-variant: normal;
+}
+sup {
+  vertical-align: text-top;
+}
+sub {
+  vertical-align: text-bottom;
+}
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+input,
+textarea,
+select {
+  *font-size: 100%;
+}
+legend {
+  color: #000000;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+a {
+  text-decoration: none;
+}
+html,
+body {
+  overflow: hidden;
+}
+body {
+  font-size: 12px;
+}
+.wrap {
+  padding-top: 35px;
+  margin: 0 20px;
+}
+.title {
+  font-size: 3em;
+  color: #42474B;
+  padding-bottom: 20px;
+}
+@media only screen and (min-width: 960px) {
+  body {
+    font-size: 16px;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .title {
+    padding-bottom: 60px;
+  }
+}
+#content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: #FFF;
+  font-weight: 700;
+  text-align: center;
+}
+/* #################################################################################################################################### */
+/* ### Main Menu 主菜单页面                                                         */
+/* #################################################################################################################################### */
+#main-menu {
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+  width: 100%;
+  height: 100%;
+  background-color: #343e43;
+  transition: transform 0.5s ease;
+  -webkit-transition: transform 0.5s ease;
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+#main-menu .vcenter {
+  position: relative;
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+#main-menu .hcenter {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+#main-menu .main-nav {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  display: inline-block;
+  text-align: left;
+}
+#main-menu .main-nav li {
+  padding: 10px 0;
+}
+#main-menu .main-nav a {
+  color: #fff;
+  font-size: 30px;
+  transition: color 0.5s ease;
+}
+#main-menu .main-nav a:hover {
+  color: #e4393c;
+}
+#main-menu .main-nav .active {
+  color: #e4393c;
+}
+#main-menu.open {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+}
+@media only screen and (min-width: 960px) {
+  #main-menu {
+    width: 33.333%;
+    bottom: 60px;
+  }
+}
+/* #################################################################################################################################### */
+/* ### Bottom Bar 页面底部栏                                                             */
+/* #################################################################################################################################### */
+#bottom-bar {
+  z-index: 999;
+  background-color: #2f3724;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+#bottom-bar .main-menu-button,
+#bottom-bar .next-button {
+  position: absolute;
+  top: 5px;
+}
+#bottom-bar .main-menu-button {
+  left: 10px;
+}
+#bottom-bar .next-button {
+  right: 10px;
+}
+#bottom-bar .icon {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  border: 2px solid #444b55;
+  border-radius: 50%;
+  background-size: 100% auto;
+}
+#bottom-bar .menu {
+  background-image: url(../img/icon/main_nav_icon.png);
+  background-position: center top;
+}
+#bottom-bar span.icon-change {
+  background-position: center bottom;
+}
+#bottom-bar .next {
+  background-image: url(../img/icon/up_down_icon.png);
+  background-position: center top;
+}
+@media only screen and (min-width: 960px) {
+  #bottom-bar {
+    height: 60px;
+  }
+  #bottom-bar .icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+/* #################################################################################################################################### */
+/* ### 内容页共用样式                                               */
+/* #################################################################################################################################### */
+section {
+  z-index: 888;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.animate {
+  transition: top 1s ease;
+  -webkit-transition: top 1s ease ;
+}
+.state0 {
+  top: 100%;
+}
+.state1 {
+  top: 0;
+}
+.state2 {
+  top: -50%;
+}
+/* #################################################################################################################################### */
+/* ###homepage 主页                                                  */
+/* #################################################################################################################################### */
+.home {
+  background: url(../img/bg/bg1.jpg) no-repeat;
+  background-size: cover;
+}
+.home img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+.home .home-log {
+  width: 100px;
+  margin-left: -50px;
+  margin-top: -150px;
+}
+.home .home-name {
+  width: 200px;
+  margin-left: -100px;
+}
+@media only screen and (min-width: 960px) {
+  .home .home-log {
+    width: 200px;
+    margin-left: -100px;
+    margin-top: -250px;
+  }
+  .home .home-name {
+    width: 400px;
+    margin-left: -200px;
+  }
+}
+/* #################################################################################################################################### */
+/* ### skiis Page 专业技能页                                                 */
+/* #################################################################################################################################### */
+.skills {
+  background-color: #FCFCFC;
+}
+.skills .skill-list {
+  line-height: 1.6;
+}
+.skills .skill-item {
+  margin-bottom: 10px;
+  position: relative;
+}
+.skills .skill-item h3 {
+  font-size: 1.4em;
+  font-weight: 600;
+  width: 0%;
+  height: 40px;
+  line-height: 40px;
+  text-indent: 1rem;
+  text-align: left;
+  transition: all 1.5s ease;
+}
+.skills .skill-info {
+  padding: 20px;
+  position: absolute;
+  left: 150px;
+  top: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  z-index: 999;
+  color: #666;
+  font-weight: 400;
+  text-align: left;
+  overflow: hidden;
+  display: none;
+}
+.skills .skills-js {
+  background-color: #e47d20;
+  border-left: 3px solid #bc4800;
+}
+.skills .skills-css {
+  background-color: #2dcd6d;
+  border-left: 3px solid #1e9e54;
+}
+.skills .skills-html {
+  background-color: #5868a4;
+  border-left: 3px solid #3b3c50;
+}
+.skills .skills-ps {
+  background-color: #505050;
+  border-left: 3px solid #2c2c2c;
+}
+.skills .skills-php {
+  background-color: #4083d1;
+  border-left: 3px solid #10437a;
+}
+.skills .skills-mysql {
+  background-color: #3398dc;
+  border-left: 3px solid #2470a4;
+}
+@media only screen and (min-width: 960px) {
+  .skills .skill-item {
+    margin-bottom: 25px;
+  }
+}
+/* #################################################################################################################################### */
+/* ### work experence 工作经历                                              */
+/* #################################################################################################################################### */
+.experence {
+  background: url(../img/bg/bg-skills.png) repeat;
+}
+.experence-wrap {
+  position: relative;
+  height: 100%;
+}
+.job-wrap {
+  position: relative;
+}
+.experence-line {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-right: 2px solid #aab2bd;
+  z-index: 1;
+}
+.time-point {
+  width: 120px;
+  padding: 3px 5px;
+  text-align: center;
+  background-color: #aab2bd;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+.job-wrap-inner {
+  position: relative;
+  z-index: 10;
+}
+.job-info {
+  background-color: #fff;
+  width: 90%;
+  border-radius: 4px;
+  box-shadow: 0 0 8px #ccc;
+  margin: 15px;
+  padding: 5px;
+  color: #333;
+}
+.job-left {
+  float: none;
+}
+.job-right {
+  float: none;
+}
+.job-img {
+  display: none;
+}
+.job-text {
+  text-align: left;
+  padding-left: 8px;
+  overflow: hidden;
+}
+.job-text h3 {
+  font-size: 1.2em;
+  font-weight: 600;
+  padding-bottom: 4px;
+}
+.job-text p {
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 1.5em;
+}
+.job-text .job-company-detail {
+  display: none;
+}
+@media only screen and (min-width: 960px) {
+  .experence-line {
+    display: block;
+  }
+  .job-info {
+    width: 45%;
+  }
+  .job-info .job-company-detail {
+    display: block;
+  }
+  .job-left {
+    float: left;
+  }
+  .job-right {
+    float: right;
+  }
+  .job-img {
+    display: block;
+    float: left;
+    height: 100%;
+    overflow: hidden;
+  }
+  .job-img img {
+    width: 50px;
+    height: 50px;
+  }
+}
+/* #################################################################################################################################### */
+/* ### work experence 项目经验                                           */
+/* #################################################################################################################################### */
+.main3 {
+  background-color: yellow;
+}
+/* #################################################################################################################################### */
+/* ### work experence 个人相册                                             */
+/* #################################################################################################################################### */
+.album {
+  background: url(../img/bg/bg2.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.album-nav {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+  height: 60px;
+}
+.album-nav .album-logo {
+  margin-left: 10px;
+  width: 92px;
+  height: 100%;
+  float: left;
+  background: url(../img/pillar-liu/pillar-liu.png) center no-repeat;
+  background-size: contain;
+}
+.album-nav .nav-right {
+  height: 100%;
+  float: right;
+  margin-top: 15px;
+}
+.album-nav .album-login,
+.album-nav .album-regist {
+  font-family: "microsoft yahei";
+  color: #fff;
+  font-size: 1.2em;
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 15px;
+  margin-left: 10px;
+}
+.album-wrap {
+  padding: 15vh 10px 0 10px;
+}
+.album-wrap h1 {
+  margin: 0 auto 20px auto;
+  font-size: 2em;
+  line-height: 1em;
+}
+.album-wrap h2 {
+  font-family: "microsoft yahei";
+  margin: 0 auto 40px auto;
+  font-size: 1.5em;
+}
+.album-wrap .album-btn {
+  display: block;
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 48px;
+  font-size: 20px;
+  color: #fff;
+  background-color: #0099e5;
+  border-radius: 4px;
+}
+@media only screen and (min-width: 960px) {
+  .album-nav {
+    padding: 0 30px;
+  }
+  .album-wrap {
+    padding: 25vh 10px 0 10px;
+  }
+  .album-wrap a.album-btn {
+    min-width: 250px;
+  }
+  .album-wrap .album-btn:hover {
+    background-color: #08c;
+  }
+}
+/* #################################################################################################################################### */
+/* ### demo案例                                          */
+/* #################################################################################################################################### */
+.main5 {
+  background-color: antiquewhite;
+}
+/* #################################################################################################################################### */
+/* ### 个人插件                                          */
+/* #################################################################################################################################### */
+.main6 {
+  background-color: sandybrown;
+}

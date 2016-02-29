@@ -1,0 +1,25 @@
+{
+	"still":[
+		{"thumbnailPath":"../img/album/thumbnails/1.jpg","tWidth":675,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/2.jpg","tWidth":668,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/3.jpg","tWidth":297,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/4.jpg","tWidth":300,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/5.jpg","tWidth":301,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/6.jpg","tWidth":301,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/7.jpg","tWidth":307,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/8.jpg","tWidth":301,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/9.jpg","tWidth":302,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/10.jpg","tWidth":300,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/11.jpg","tWidth":295,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/12.jpg","tWidth":301,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/13.jpg","tWidth":299,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/14.jpg","tWidth":301,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/15.jpg","tWidth":299,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/16.jpg","tWidth":303,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/17.jpg","tWidth":677,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/18.jpg","tWidth":299,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/19.jpg","tWidth":660,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/20.jpg","tWidth":300,"tHeight":450},
+		{"thumbnailPath":"../img/album/thumbnails/21.jpg","tWidth":300,"tHeight":450}
+	]
+}

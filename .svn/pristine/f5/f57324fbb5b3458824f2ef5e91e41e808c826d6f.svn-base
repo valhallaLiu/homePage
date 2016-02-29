@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Pillar Liu的个人相册</title>
+		<!--优先使用webkit内核渲染-->
+		<meta name="renderer" content="webkit" />
+		<!--使用最高版本的ie渲染-->
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="../css/myAlbum.css"/>
+	</head>
+	<body>
+		<!--导航栏-->
+		<div class="main-nav">
+			<!--导航条-->
+			<div class="nav-bar">
+			<div class="wrap clearfix">
+				<div class="nav-left">
+					<a href="../index.html" class="main-link">
+						<span class="main-logo"></span>
+					</a>
+					<ul class="left-list">
+						<li class="top">
+							<a href="javascript:;">
+								<span class="icon index"></span>
+								<strong>主页</strong>
+							</a>
+						</li>
+						<li class="top">
+							<a href="javascript:;">
+								<span class="icon discover"></span>
+								<strong>发现</strong>
+							</a>
+						</li>
+						<li class="top">
+							<a href="javascript:;">
+								<span class="icon upload"></span>
+								<strong>上传</strong>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="nav-search">
+					<form>
+						<input type="text"  class="query" placeholder="搜索" name="q" />
+						<span class="icon submit"></span>
+					</form>
+				</div>
+				<div class="nav-profile">
+					<ul>
+						<li class="top">
+							<a href="javascript:;">
+								<strong>注册</strong>
+							</a>
+						</li>
+						<li class="top">
+							<a href="javascript:;">
+								<strong>登录</strong>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			</div>
+			
+			<!--导航项-->
+			<div class="navigation clearfix">
+			<ul class="nav-area clearfix">
+				<li class="nav-list active"><a href="javascript:;">风景</a></li>
+				<li class="nav-list"><a href="javascript:;">人像</a></li>
+				<li class="nav-list"><a href="javascript:;">微距</a></li>
+				<li class="nav-list"><a href="javascript:;">家乡</a></li>
+				<li class="nav-list"><a href="javascript:;">静物</a></li>
+			</ul>
+		</div>
+		</div>
+		<!--图片内容页面-->
+		<div class="photo-container">
+			<div class="photo-grird">
+				
+			</div>
+		</div>
+		<script src="../js/libs/require.js" data-main="../js/myAlbum" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
