@@ -1,6 +1,7 @@
 //reset
 @import "reset";
 @import "base";
+
 a{
     text-decoration: none;
 }
@@ -170,17 +171,23 @@ section{
     overflow: hidden;
 }
 .animate{
-    transition: top 1s ease;
-    -webkit-transition: top 1s ease ;
+    transition: transform 1s ease;
+    -webkit-transition: all 1s ease;
 }
 .state0{
-    top: 100%;
+//  top: 100%;
+    transform: translateY(100%);
+    -webkit-transform: translateY(100%);
 }
 .state1{
-    top: 0;
+//  top: 0;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
 }
 .state2{
-    top:-50%
+//  top:-50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 /* #################################################################################################################################### */
 /* ###homepage 主页                                                  */

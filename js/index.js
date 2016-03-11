@@ -17,8 +17,8 @@ require(["jquery"],function($){
 	    isAndroid = ua.match(/(Android)\s+([\d.]+)/),
 	    isMobile = isIphone || isAndroid;
 	//*******************************页面整体**********************
-	//点击向下按钮，更改页面
 	
+	//点击向下按钮，更改页面
 	function btnClick(){
 		$(".next-button").click(function(){
 			if(index<sectionCount){
@@ -41,7 +41,7 @@ require(["jquery"],function($){
 	}
 	//向上或向下滚轮屏幕，更改页面
 	function pageScroll(){
-		//设置canScroll变量，判断当前是否能滚动
+		//防止连续滚动导致连续翻页，每次滚动1s之后才能第二次滚动
 		var canScroll = true;
 		var type = "mousewheel";
 		//解决firefox的兼容性问题
@@ -58,7 +58,7 @@ require(["jquery"],function($){
 							setTimeout(function(){canScroll = true;},1000);
 						}
 					}else{
-						if(index<7){
+						if(index<sectionCount){
 							index++;
 							canScroll = false;
 							setSection();
@@ -79,7 +79,7 @@ require(["jquery"],function($){
 							setTimeout(function(){canScroll = true;},1000);
 						}
 					}else{
-						if(index<7){
+						if(index<sectionCount){
 							index++;
 							canScroll = false;
 							setSection();
@@ -97,6 +97,10 @@ require(["jquery"],function($){
 				startY  = 0,
 				endY = 0,
 				moveY = 0;
+			//阻止iphone的橡皮筋效果
+			document.addEventListener("touchmove",function stopScrolling(e){
+				e.preventDefault();
+			});
 			body.addEventListener("touchstart",function(e){
 				startY = e.changedTouches[0].clientY;
 			});
