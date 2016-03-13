@@ -108,13 +108,13 @@ require(["jquery"],function($){
 				endY = e.changedTouches[0].clientY; 
 				moveY = endY - startY;
 				console.log(moveY);
-				if((endY-startY)>=20){
+				if((endY-startY)>=60){
 					if(index > 1){
 						index --;
 						setSection();
 					}
 					
-				}else if((endY-startY)<=-20){
+				}else if((endY-startY)<=-60){
 					if(index < sectionCount){
 						index ++;
 						setSection();
