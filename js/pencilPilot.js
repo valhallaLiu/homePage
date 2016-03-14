@@ -6,12 +6,13 @@ require.config({
 
 require(["jquery"],function($){
 $(function(){
+	hhh.innerHTML = "nishisha"
 	//获取canvas对象
 	var canvas = $(".canvas")[0];
 	var context = canvas.getContext("2d");
 	//设置游戏状态
 	const WELCOM = 0,
-		  START = 1,
+		  LAODING = 1,
 		  RUNNING = 2,
 		  PAUSE = 3,
 		  GAMEOVER = 4;
@@ -19,8 +20,8 @@ $(function(){
 	var state = 0;
 	//获取当前屏幕大小，从而判断canvas画布大小
 	function getScreenWH(){
-		var width = document.body.clientWidth,
-			height = document.body.clientHeight,
+		var width = (window.innerWidth > 0) ? window.innerWidth : screen.width,
+			height = (window.innerHeight > 0) ? window.innerHeight : screen.height,
 			ratio = 480/852;
 		if(width >= 480){
 			width = 480;
@@ -30,8 +31,9 @@ $(function(){
 			width = parseInt(width);
 		}
 		return {width,height};
-	}
+	};
 	var wH = getScreenWH();
+	console.log("1");
 	cWidth = wH.width;
 	cHeight = wH.height;
 	canvas.width = cWidth;
@@ -78,6 +80,7 @@ $(function(){
 			}
 		};
 	}
+	/**************2.游戏载入阶段**************/
 	
 	/**************生成游戏对象实例**************/
 	var sky = new Sky(bgConfig);
@@ -90,7 +93,7 @@ $(function(){
 			case WELCOM:
 				context.drawImage(title,titleX,0);
 				break;
-			case START:
+			case LAODING:
 				break;
 			case RUNNING:
 				break;
