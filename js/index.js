@@ -1,7 +1,6 @@
 require.config({
 	paths:{
-		jquery:"libs/jquery-1.11.3.min",
-		//touchjs:"touch"
+		jquery:"libs/jquery-1.11.3.min"
 	}
 });
 require(["jquery"],function($){
