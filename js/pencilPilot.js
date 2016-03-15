@@ -44,12 +44,22 @@ $(function(){
 	cHeight = wH["height"];
 	canvas.width = cWidth;
 	canvas.height = cHeight;
+	//设置游戏计分和生命数值
+	function paintLife(){
+		context.strokeText("分数:"+score,10,40);
+		context.strokeText("生命:"+hero.life,(cWidth-80),40)
+		context.font = "bold 26px Microsoft Yahei"
+	}
 	/**************1.游戏欢迎阶段**************/
 	//创建背景图片和标题图片
 	var bg = new Image(),
-		title = new Image();
+		title = new Image(),
+		gameOver = new Image(),
+		pause = new Image();
 	bg.src = "../img/pencilPilot/background.png";
 	title.src = "../img/pencilPilot/start.png";
+	gameOver.src = "../img/pencilPilot/gameover.png";
+	pause.src = "../img/pencilPilot/pause.png";
 	var titleX = (cWidth-280)/2;
 	//创建背景图片的构造函数及参数对象
 	var bgConfig = {
@@ -82,11 +92,7 @@ $(function(){
 		};
 	}
 	/**************2.游戏载入阶段**************/
-	canvas.onclick = function(){
-		if(state == WELCOM){
-			state = LAODING;
-		}
-	}
+	
 	//将loading的四张图片放入数组
 	var loadingImages = [];
 	for(var i=0;i<4;i++){
@@ -147,26 +153,22 @@ $(function(){
 		this.y = config.y;				  								
 		this.life = config.life;		 								 
 		this.frame = config.frame;							 			 
-		this.isDied = false;		//hero是否能够被删除
+		this.isDead = false;		//hero是否能够被删除
+		this.isDel = false;
 		this.paint = function(){
 			context.drawImage(this.images[this.frame],this.x,this.y);
 		}
-		this.crash = function(){
-			if(this.isDied){
-				if(this.frame = this.images.length-1){
-					this.life--;
-				}else{
-					this.frame++;
-				}
-			}
-		}
 		this.move = function(){
-			this.paint();
-			this.crash();
 			this.frame++;
-			if(this.frame == 2){
+			if(this.isDead){
+				if(this.frame = this.images.length-1){
+					this.isDead = false;
+					this.isDel = true;
+				}
+			}else if(this.frame == 2){
 				this.frame = 0;
 			}
+			this.paint();
 		}
 	}
 	//创建子弹的构造函数及参数对象
@@ -188,7 +190,6 @@ $(function(){
 			context.drawImage(this.image,this.x,this.y);
 		}
 		this.move = function(){
-			this.paint();
 			this.y -= 4;
 		}
 		this.outOfScreen = function(){
@@ -285,6 +286,17 @@ $(function(){
 	}
 	
 	/**************4.游戏暂停阶段**************/
+	//游戏暂停时，仅仅绘制当前已存在的对象
+	function gamePause(){
+		hero.paint();
+		for(var i=0;i<bullits.length;i++){
+			bullits[i].paint();
+		}
+		for(var j=0;j<enemies.length;j++){
+			enemies[j].paint();
+		}
+	}
+	
 	/**************5.游戏结束阶段**************/
 	/**************生成游戏对象实例**************/
 	//天空背景
@@ -293,24 +305,19 @@ $(function(){
 	var loading = new Loading(loadingConfig);
 	//hero
 	var hero = new Hero(heroConfig);
-	//鼠标跟随或手指跟随
-	if(isMobile){
-		canvas.ontouchmove = function(e){
-			e = window.event || e;
-			if(state == RUNNING){
-				hero.x = e.changedTouches[0].clientX - hero.width/2;
-				hero.y = e.changedTouches[0].clientY - hero.height/2;
+	//hero是否删除
+	function isHeroDel(){
+		if(hero.isDel){
+			hero.life-- ;
+			heroConfig.life--;
+			if(hero.life == 0){
+				state = GAMEOVER;
+			}else{
+				hero.isDel = false;
+					hero = new Hero(heroConfig);
 			}
 		}
-	}else{
-		canvas.onmousemove = function(e){
-			e = window.event || e;
-			if(state == RUNNING){
-				hero.x = e.offsetX - hero.width/2;
-				hero.y = e.offsetY - hero.height/2;
-			}
-		}
-	}	
+	}
 	//bullit
 	var bullits = [];
 	var bullitsTimes = 0;
@@ -322,6 +329,7 @@ $(function(){
 		bullitsTimes ++;
 		//子弹运动
 		for(var i=0;i<bullits.length;i++){
+			bullits[i].paint();
 			bullits[i].move();
 		}
 	}
@@ -352,13 +360,26 @@ $(function(){
 			enemies[i].move();
 		}
 	}
-	function isEnemiesdel(){
+	function isEnemiesDel(){
 		for(var i=0;i<enemies.length;i++){
 			if(enemies[i].outOfScreen()){
 				enemies.splice(i,1);
 				i--;
 			}else if(enemies[i].isDead){
 				if(enemies[i].frame == (enemies[i].images.length-1)){
+					//根据敌机类型计算分数
+					switch(enemies[i].type){
+						case 1:
+							score++;
+							break;
+						case 2:
+							score += 3;
+							break;
+						case 3:
+							score += 10;
+							break;
+					}
+					//删除飞机
 					enemies.splice(i,1);
 					i--;
 				}else{
@@ -382,6 +403,74 @@ $(function(){
 			}
 		}
 	}
+	/**************游戏中的事件**************/
+	//点击开始事件
+	canvas.onclick = function(){
+		if(state == WELCOM ){
+			state = LAODING;
+		}else if(state == GAMEOVER){
+			//score = 0;
+			location.reload();
+		}
+	}
+	//空格暂停事件，以及键盘操控飞机
+	$(document).keydown(function(e){
+		e = window.event || e;
+		if(e.keyCode == 32){
+			switch(state){
+				case 2:
+					state = 3;
+					break;
+				case 3:
+					state = 2;
+					break;
+			}
+		}
+		/*switch(e.keyCode){
+			case 37:
+				if(hero.x > 15)
+					hero.x -= 15;	
+				break;
+			case 38:
+				if(hero.y > 15)
+					hero.y -= 15;	
+				break;
+			case 39:
+				if(hero.x < (cWidth-15))
+					hero.x += 15;
+				break;
+			case 40:
+				if(hero.y < (cHeight-15))
+					hero.y += 15;
+				break;
+		}*/
+	})
+	//鼠标跟随或手指跟随
+	if(isMobile){
+		canvas.ontouchmove = function(e){
+			e = window.event || e;
+			if(state == RUNNING){
+				hero.x = e.changedTouches[0].clientX - hero.width/2;
+				hero.y = e.changedTouches[0].clientY - hero.height/2;
+			}
+		}
+	}else{
+		canvas.onmousemove = function(e){
+			e = window.event || e;
+			if(state == RUNNING){
+				hero.x = e.offsetX - hero.width/2;
+				hero.y = e.offsetY - hero.height/2;
+			}
+		}
+	}
+	//阻止苹果的“拉橡皮筋”效果
+	if(isIphone){
+		function preventDefault(ev) {
+  			ev.preventDefault();
+		}
+		document.addEventListener('touchmove', preventDefault);
+	}
+	
 	/**************游戏核心控制器**************/
 	setInterval(function(){
 		//绘制背景图片并循环移动
@@ -397,17 +486,23 @@ $(function(){
 				break;
 			case RUNNING:
 				hero.move();
+				isHeroDel();
 				createBullits();
 				isBullitsDel();
 				createEnemies();
-				isEnemiesdel();
+				isEnemiesDel();
 				hit();
 				break;
 			case PAUSE:
+				gamePause();
+				context.drawImage(pause,titleX,100);
 				break;
 			case GAMEOVER:
+				context.drawImage(gameOver,titleX,100);
 				break;
 		}
+		//计分和生命剩余数
+		 paintLife();
 	},50)
 });
 })
