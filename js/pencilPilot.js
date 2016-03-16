@@ -23,6 +23,8 @@ $(function(){
 		  GAMEOVER = 4;
 	var score = 0;
 	var state = 0;
+	var superMode = false;
+	var countDeadEnemies = 0;
 	//获取当前屏幕大小，从而判断canvas画布大小
 	function getScreenWH(){
 		var width = (window.innerWidth > 0) ? window.innerWidth : screen.width,
@@ -33,7 +35,7 @@ $(function(){
 			width = 480;
 			height = 680;
 		}else{
-			height = parseInt(width/ratio);
+			//height = parseInt(width/ratio);
 			width = parseInt(width);
 		};
 		wH = {"width":width,"height":height};
@@ -47,8 +49,9 @@ $(function(){
 	//设置游戏计分和生命数值
 	function paintLife(){
 		context.strokeText("分数:"+score,10,40);
-		context.strokeText("生命:"+hero.life,(cWidth-80),40)
+		context.strokeText("生命:"+hero.life,(cWidth-100),40)
 		context.font = "bold 26px Microsoft Yahei"
+	
 	}
 	/**************1.游戏欢迎阶段**************/
 	//创建背景图片和标题图片
@@ -140,7 +143,7 @@ $(function(){
 		images:heroimages,
 		width:99,
 		height:124,
-		life:3,
+		life:10,
 		x:cWidth/2 - 50,
 		y:cHeight -150,
 		frame:0
@@ -188,6 +191,8 @@ $(function(){
 		this.isDead = false;
 		this.paint = function(){
 			context.drawImage(this.image,this.x,this.y);
+			/*context.drawImage(this.image,this.x-32,this.y+42);
+			context.drawImage(this.image,this.x+32,this.y+42);*/
 		}
 		this.move = function(){
 			this.y -= 4;
@@ -284,7 +289,44 @@ $(function(){
 			}
 		}
 	}
-	
+	//创建bouns的构造函数及参数对象
+	var bounsImage = new Image();
+	bounsImage.src = "../img/pencilPilot/bouns.png";
+	var bounsMkImage = new Image();
+	bounsMkImage.src = "../img/pencilPilot/superBullits.png";
+	var bounsConfig = {
+		image:bounsImage,
+		width:57,
+		height:51
+	}
+	var bounsMkConfig = {
+		image:bounsMkImage,
+		width:57,
+		height:51
+	}
+	function Bouns(config){
+		this.image = config.image;
+		this.width = config.width;
+		this.height = config.height;
+		this.x = parseInt(Math.random()*(cWidth - this.width));
+		this.y = -this.height;
+		this.isClear = false;
+		this.paint = function(){
+			context.drawImage(this.image,this.x,this.y);
+		};
+		this.move = function(){
+			this.y += 10;
+		}
+		this.isHit = function(c){
+			return c.x + c.width > this.x &&
+				   c.y < this.y + this.height &&
+				   c.x < this.x + this.width &&
+				   c.y + c.height > this.y; 
+		}
+		this.outOfScreen = function(){
+			return (this.y - this.height >cHeight);
+		}
+	}
 	/**************4.游戏暂停阶段**************/
 	//游戏暂停时，仅仅绘制当前已存在的对象
 	function gamePause(){
@@ -325,6 +367,19 @@ $(function(){
 		//每500ms创建一个子弹
 		if(bullitsTimes%10 == 0){
 			bullits[bullits.length] = new Bullit(bullitConfig);
+			if(superMode){
+				for(var j=0;j<2;j++){
+					bullits[bullits.length] = new Bullit(bullitConfig);
+					if(j==0){
+						bullits[bullits.length-1].x -= 32;
+						bullits[bullits.length-1].y += 42;
+					}else{
+						bullits[bullits.length-1].x += 32;
+						bullits[bullits.length-1].y += 42;
+					}
+				}
+			}
+			
 		}
 		bullitsTimes ++;
 		//子弹运动
@@ -382,14 +437,57 @@ $(function(){
 					//删除飞机
 					enemies.splice(i,1);
 					i--;
+					countDeadEnemies++;
 				}else{
 					enemies[i].frame++;
 				}
 			}
 		}
 	}
+	//bouns
+	var bouns = [];
+	var bounsMk = [];
+	var bounsMkTimes = 0;
+	function createBouns(){
+		if(countDeadEnemies > 10){
+			countDeadEnemies = -90;
+			bounsMkTimes++;
+			bouns[bouns.length] = new Bouns(bounsConfig);
+		}
+		if(bounsMkTimes > 0){
+			bounsMkTimes = 0;
+			bounsMk[bounsMk.length] = new Bouns(bounsMkConfig);
+		}
+		if(bouns.length >0){
+			for(i=0;i<bouns.length;i++){
+				bouns[i].paint();
+				bouns[i].move();	
+			}
+		}
+		if(bounsMk.length >0){
+			for(j=0;j<bounsMk.length;j++){
+				bounsMk[j].paint();
+				bounsMk[j].move();	
+			}
+		}
+	}
+	function isBounsDel(){
+		for(var i=0;i<bouns.length;i++){
+			if(bouns[i].outOfScreen() || bouns[i].isClear){
+				bouns.splice(i,1);
+				i--;
+			}
+		}
+		for(var j=0;j<bounsMk.length;j++){
+			if(bounsMk[j].outOfScreen() || bounsMk[j].isClear){
+				bounsMk.splice(j,1);
+				j--;
+			}
+		}
+	}
 	//判断相撞
 	function hit(){
+		//判断敌人和子弹、hero相撞
 		for(var i=0;i<enemies.length;i++){
 			for(var j=0;j<bullits.length;j++){
 				if(enemies[i].isHit(bullits[j])){
@@ -400,6 +498,24 @@ $(function(){
 			if(enemies[i].isHit(hero)){
 				enemies[i].crash();
 				hero.isDead = true;
+			}
+		}
+	}
+	function hitBouns(){
+		//判断bounsMk和hero相撞
+		for(var i=0;i<bounsMk.length;i++){
+			if(bounsMk[i].isHit(hero)){
+				superMode = true;
+				bounsMk[i].isClear = true;
+			}
+		}
+		//判断bouns和hero相撞
+		for(var j=0;j<bouns.length;j++){
+			if(bouns[j].isHit(hero)){
+				for(var k=0;k<enemies.length;k++){
+					enemies[k].isDead = true;
+				}
+				bouns[j].isClear = true;
 			}
 		}
 	}
@@ -491,7 +607,10 @@ $(function(){
 				isBullitsDel();
 				createEnemies();
 				isEnemiesDel();
+				createBouns();
+				isBounsDel();
 				hit();
+				hitBouns();
 				break;
 			case PAUSE:
 				gamePause();
