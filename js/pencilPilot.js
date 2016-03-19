@@ -562,7 +562,7 @@ $(function(){
 		}*/
 	})
 	//鼠标跟随或手指跟随
-	if(isMobile){
+	if(deviceType.isMobile){
 		canvas.ontouchmove = function(e){
 			e = window.event || e;
 			if(state == RUNNING){
@@ -580,7 +580,7 @@ $(function(){
 		}
 	}
 	//阻止苹果的“拉橡皮筋”效果
-	if(isIphone){
+	if(deviceType.isIphone){
 		function preventDefault(ev) {
   			ev.preventDefault();
 		}

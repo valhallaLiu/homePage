@@ -6,21 +6,21 @@ require.config({
 	},
 	paths:{
 		jquery:"libs/jquery-1.11.3.min",
-		"jquery.lazyload":"libs/jquery.lazyload"
+		deviceType:"component/deviceType"
 	}
 });
-require(["jquery","jquery.lazyload"],function($){
+require(["jquery","deviceType"],function($,deviceType){
 	//*******************************全局变量**********************
 	//获取页面数
 	var sectionCount = $("section").size();
 	//初始化页数为第一页
 	var index = 1;
 	//手机端和pad端的判断
-	var ua = navigator.userAgent,
+/*	var ua = navigator.userAgent,
 		ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
 	    isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
 	    isAndroid = ua.match(/(Android)\s+([\d.]+)/),
-	    isMobile = isIphone || isAndroid;
+	    isMobile = isIphone || isAndroid;*/
 	//*******************************页面整体**********************
 	
 	//点击向下按钮，更改页面
@@ -97,7 +97,7 @@ require(["jquery","jquery.lazyload"],function($){
 	}
 	//触摸滚动，更改页面
 	function pageTouchScroll(){
-		if(isMobile){
+		if(deviceType.isMobile){
 			var body = document.body,
 				startY  = 0,
 				endY = 0,
@@ -112,7 +112,6 @@ require(["jquery","jquery.lazyload"],function($){
 			body.addEventListener("touchend",function(e){
 				endY = e.changedTouches[0].clientY; 
 				moveY = endY - startY;
-				console.log(moveY);
 				if((endY-startY)>=60){
 					if(index > 1){
 						index --;
@@ -185,7 +184,7 @@ require(["jquery","jquery.lazyload"],function($){
 			});
 		});
 		//详细信息的hover显示，如果是手机，则不执行这段绑定
-		if(!isMobile){
+		if(!deviceType.isMobile){
 			$(".skill-item").each(function(){
 				$(this).hover(
 					function(){
@@ -199,10 +198,8 @@ require(["jquery","jquery.lazyload"],function($){
 		}
 	}
 	//*******************************相册页**********************
-	
 	$(function(){
 		//相册页背景延迟加载
-		console.log($.lazy);
 		//$("section.lazy").lazyLoad();
 		//页面整体效果
 		btnClick();

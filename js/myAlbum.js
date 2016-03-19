@@ -116,6 +116,5 @@ require(["jquery","getPosition","lightbox"],function($,getPosition,lightBox){
 			speed:"slow",
 			scale:0.8
 		});
-		console.log(LightBox);
 	})
 })
