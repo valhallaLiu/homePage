@@ -1,12 +1,14 @@
 require.config({
 	shim:{
-		"jquery.lazyload":{
-			deps:["jquery"]
+		'jquery.fn.lazyload':{
+			deps:["jquery"],
+			 exports: 'jQuery.fn.lazyload'
 		}
 	},
 	paths:{
 		jquery:"libs/jquery-1.11.3.min",
-		deviceType:"component/deviceType"
+		deviceType:"component/deviceType",
+		'jquery.fn.lazyload':"libs/jquery.lazyload"
 	}
 });
 require(["jquery","deviceType"],function($,deviceType){
@@ -166,10 +168,16 @@ require(["jquery","deviceType"],function($,deviceType){
 		$(".main-nav a").eq(index-1).addClass("active");
 		$("#main-menu").removeClass("open");
 		$(".menu").removeClass("icon-change");
-		//添加初始进入页面的动画
+		//处理到每个页面触发的方法
 		switch(index){
 			case 2:
 			skillsHandler();
+			break;
+			case 5:
+			albumHandler();
+			break;
+			case 6:
+			gameHandler();
 			break;
 		}
 	}
@@ -198,9 +206,23 @@ require(["jquery","deviceType"],function($,deviceType){
 		}
 	}
 	//*******************************相册页**********************
+	//背景图片延迟加载
+		function lazyLoad(obj,src){
+			obj.style.backgroundImage = src;
+			console.log(obj);
+		}
+		function albumHandler(){
+			var obj = document.getElementById("main4"),
+				src = "url(img/bg/bg2.jpg)";
+				lazyLoad(obj,src);
+		}
+	//*******************************游戏页**********************
+		function gameHandler(){
+			var obj = document.getElementById("main5");
+				src = "url(img/bg/game-bg.jpg)";
+				lazyLoad(obj,src);
+		}
 	$(function(){
-		//相册页背景延迟加载
-		//$("section.lazy").lazyLoad();
 		//页面整体效果
 		btnClick();
 		menuClick();
