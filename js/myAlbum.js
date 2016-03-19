@@ -7,6 +7,7 @@ require.config({
 });
 require(["jquery","getPosition","lightbox"],function($,getPosition,lightBox){
 	//判断是否能够插入图片
+	
 	var canAppendPic = false;
 	//获取不同相册的图片
 	var picType = "landscape";
@@ -32,7 +33,7 @@ require(["jquery","getPosition","lightbox"],function($,getPosition,lightBox){
 					var width = $(".photo-grird").width();
 					//获取缩略图的宽高
 					var data = getSize(json[picType],"tWidth","tHeight");
-					//计算出每张图片所在的位置
+					//每300ms检查一次，是否图片加载完毕
 					var timer = null;
 					timer = setInterval(function(){
 						if(canAppendPic){
@@ -77,7 +78,6 @@ require(["jquery","getPosition","lightbox"],function($,getPosition,lightBox){
 				}
 			}
 		});
-		console.log(num);
 		return data;
 	}
 	//将图片元素插入容器中,参数： container-容器的jq对象、data-图片数组、width-容器宽度、gap-图像之间的间距
@@ -116,5 +116,6 @@ require(["jquery","getPosition","lightbox"],function($,getPosition,lightBox){
 			speed:"slow",
 			scale:0.8
 		});
+		console.log(LightBox);
 	})
 })

@@ -1,9 +1,15 @@
 require.config({
+	shim:{
+		"jquery.lazyload":{
+			deps:["jquery"]
+		}
+	},
 	paths:{
-		jquery:"libs/jquery-1.11.3.min"
+		jquery:"libs/jquery-1.11.3.min",
+		"jquery.lazyload":"libs/jquery.lazyload"
 	}
 });
-require(["jquery"],function($){
+require(["jquery","jquery.lazyload"],function($){
 	//*******************************全局变量**********************
 	//获取页面数
 	var sectionCount = $("section").size();
@@ -192,7 +198,12 @@ require(["jquery"],function($){
 			})
 		}
 	}
+	//*******************************相册页**********************
+	
 	$(function(){
+		//相册页背景延迟加载
+		console.log($.lazy);
+		//$("section.lazy").lazyLoad();
 		//页面整体效果
 		btnClick();
 		menuClick();
