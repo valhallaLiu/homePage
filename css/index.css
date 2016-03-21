@@ -1,6 +1,6 @@
 html {
   color: #000;
-  background: #ffffff;
+  background: #FFF;
 }
 body,
 div,
@@ -95,7 +95,7 @@ select {
   *font-size: 100%;
 }
 legend {
-  color: #000000;
+  color: #000;
 }
 .clearfix {
   zoom: 1;
@@ -367,28 +367,28 @@ section {
   display: none;
 }
 .skills .skills-js {
-  background-color: #e47d20;
-  border-left: 3px solid #bc4800;
+  background-color: #E47D20;
+  border-left: 3px solid #BC4800;
 }
 .skills .skills-css {
-  background-color: #2dcd6d;
-  border-left: 3px solid #1e9e54;
+  background-color: #2DCD6D;
+  border-left: 3px solid #1E9E54;
 }
 .skills .skills-html {
-  background-color: #5868a4;
-  border-left: 3px solid #3b3c50;
+  background-color: #5868A4;
+  border-left: 3px solid #3B3C50;
 }
 .skills .skills-ps {
   background-color: #505050;
-  border-left: 3px solid #2c2c2c;
+  border-left: 3px solid #2C2C2C;
 }
 .skills .skills-php {
-  background-color: #4083d1;
-  border-left: 3px solid #10437a;
+  background-color: #4083D1;
+  border-left: 3px solid #10437A;
 }
 .skills .skills-mysql {
-  background-color: #3398dc;
-  border-left: 3px solid #2470a4;
+  background-color: #3398DC;
+  border-left: 3px solid #2470A4;
 }
 @media only screen and (min-width: 960px) {
   .skills .skill-item {
