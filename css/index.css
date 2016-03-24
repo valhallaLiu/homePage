@@ -300,7 +300,7 @@ section {
 /* ###homepage 主页                                                  */
 /* #################################################################################################################################### */
 .home {
-  background: url(../img/bg/bg1.jpg) no-repeat;
+  background: url(../img/bg/bg-home.jpg) no-repeat;
   background-size: cover;
 }
 .home img {

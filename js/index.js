@@ -213,13 +213,13 @@ require(["jquery","deviceType"],function($,deviceType){
 		}
 		function albumHandler(){
 			var obj = document.getElementById("main4"),
-				src = "url(img/bg/bg2.jpg)";
+				src = "url(img/bg/bg-album.jpg)";
 				lazyLoad(obj,src);
 		}
 	//*******************************游戏页**********************
 		function gameHandler(){
 			var obj = document.getElementById("main5");
-				src = "url(img/bg/game-bg.jpg)";
+				src = "url(img/bg/bg-game.jpg)";
 				lazyLoad(obj,src);
 		}
 	$(function(){

@@ -77,3 +77,27 @@
   background: url(../img/icon/close.png) no-repeat center center;
   cursor: pointer;
 }
+@media screen and (max-width: 960px) {
+  #G-lightbox-mask {
+    opacity: 0.9;
+  }
+  #G-lightbox-popup {
+    background-color: transparent;
+  }
+  #G-lightbox-popup .lightbox-pic-view {
+    border: none;
+    border-radius: 0;
+  }
+  #G-lightbox-popup .lightbox-btn {
+    visibility: hidden;
+  }
+  #G-lightbox-popup .lightbox-pic-caption .lightbox-caption-area {
+    visibility: hidden;
+  }
+  #G-lightbox-popup .lightbox-pic-caption .lightbox-of-index {
+    visibility: hidden;
+  }
+  #G-lightbox-popup .lightbox-pic-caption .lightbox-close-btn {
+    right: 30px;
+  }
+}

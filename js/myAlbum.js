@@ -2,12 +2,12 @@ require.config({
 	paths:{
 		jquery:"libs/jquery-1.11.3.min",
 		getPosition:"component/getPosition",
-		lightbox:"component/lightBox"
+		lightbox:"component/lightBox",
+		deviceType:"component/deviceType"
 	}
 });
-require(["jquery","getPosition","lightbox"],function($,getPosition,lightBox){
-	//判断是否能够插入图片
-	
+require(["jquery","getPosition","lightbox","deviceType"],function($,getPosition,lightBox,deviceType){
+	//如果缩略图下载完毕，则可以插入图片
 	var canAppendPic = false;
 	//获取不同相册的图片
 	var picType = "landscape";
@@ -37,6 +37,7 @@ require(["jquery","getPosition","lightbox"],function($,getPosition,lightBox){
 					var timer = null;
 					timer = setInterval(function(){
 						if(canAppendPic){
+							$(".photo-container").removeClass("container-loading");
 							appendPic($(".photo-grird"),data,width,5);
 							clearInterval(timer);
 						}
@@ -112,9 +113,17 @@ require(["jquery","getPosition","lightbox"],function($,getPosition,lightBox){
 		//渲染画面
 		render();
 		//lightbox插件
-		var lb = new LightBox({
-			speed:"slow",
-			scale:0.8
-		});
+		if(deviceType.isMobile){
+			var lb = new LightBox({
+				speed:"slow",
+				scale:1.1
+			})
+		}else{
+			var lb = new LightBox({
+				speed:"slow",
+				scale:0.8
+			})
+		}
+		
 	})
 })

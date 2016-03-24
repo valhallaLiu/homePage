@@ -1,4 +1,5 @@
 //模块用于返回一组图片的位置，传入的参数为：data-需获取参数的数组、width-容器元素的宽度、gap-图片左右及上下的间距
+//模块依赖：jquery、deviceType(判断设备是手机还是pc)
 require.config({
 	paths:{
 		jquery:"libs/jquery-1.11.3.min",
@@ -6,13 +7,6 @@ require.config({
 	}
 });
 define(["jquery","deviceType"],function($,deviceType){
-	//手机端和pad端的判断
-/*	console.log(deviceType);
-	var ua = navigator.userAgent;
-	var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
-    isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
-    isAndroid = ua.match(/(Android)\s+([\d.]+)/),
-    isMobile = isIphone || isAndroid;*/
     //获取图片位置方法
 	function getPicPos(data,width,gap){
 		//初始化合计宽度为0、宽高百分比为0
@@ -26,10 +20,10 @@ define(["jquery","deviceType"],function($,deviceType){
 		$(data).each(function(index){
 			var imgInfo = {};
 			//如果是手机，则所有图片的宽高都除2
-			if(deviceType.isMobile){
+			if(window.devicePixelRatio){
 				imgInfo = {
-					width:this.tWidth/2,
-					height:this.tHeight/2,
+					width:this.tWidth/window.devicePixelRatio,
+					height:this.tHeight/window.devicePixelRatio,
 					left:0,
 					top:0
 				};
