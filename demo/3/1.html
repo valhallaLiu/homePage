@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>单行新闻鼠标悬停效果</title>
+		<style type="text/css">
+			.news{
+				width: 350px;
+				margin: 0 auto;
+				position: relative;
+				font-size: 16px;
+			}
+			.news-list{
+				list-style: decimal inside;
+				line-height: 40px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.news-list a{
+				cursor: pointer;
+			}
+			.tip{
+				display: none;
+				position: absolute;
+				padding: 2px 4px;
+				background-color: rgba(0,0,0,0.6);
+				color: #FFFFFF;
+				border-radius: 4px;
+				left: 0;
+				top: 0;
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="news">
+			<ol>
+				<li class="news-list"><a href="javascript:;" >官员在位时替矿老板办事不收钱 退休半年索千万</a></li>
+				<li class="news-list"><a href="javascript:;">杭州萧山公墓惨烈车祸致4死5伤(图) 肇事者被抓获</a></li>
+				<li class="news-list"><a href="javascript:;">湖北财政所4人在办公楼内打麻将 串供对抗审查</a></li>
+				<li class="news-list"><a href="javascript:;">新华社：中国淡定面对展望下调 经济基本面没有变</a></li>
+				<li class="news-list"><a href="javascript:;">美国首个售枪频道开播 再次引发巨大争议(图)</a></li>
+			</ol>
+
+		</div>
+	</body>
+	<script type="text/javascript">
+			window.onload = function(){
+				(function(){
+					var oNews = document.getElementsByTagName("div")[0],
+						aLi = oNews.getElementsByTagName("li"),
+						oTip = createTip();
+						liLength = aLi.length;
+					for(var i=0;i<liLength;i++){
+						aLi[i].addEventListener("mousemove",function(e){
+							var e = window.event || e;
+							var x = oNews.offsetLeft,
+								y = oNews.offsetTop;
+							var left = e.clientX - x+6,
+								top = e.clientY - y+12;
+							oTip.style.display = "block";
+							oTip.innerText = this.innerText;
+							oTip.style.left = left + "px";
+							oTip.style.top = top + "px";
+						})
+						aLi[i].addEventListener("mouseout",function(){
+							oTip.style.display = "none";
+						})
+					}
+					function createTip(){
+						var oTip = document.createElement("div");
+						oTip.className = "tip";
+						return oNews.appendChild(oTip);
+					}
+				})()
+			}
+	</script>
+</html>

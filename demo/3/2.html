@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表格的添加和删除</title>
+		<style type="text/css">
+			.container{
+				margin: 100px 0 0 100px;
+				font-size: 16px;
+			}
+			.wrap{
+				padding-bottom: 20px;
+			}
+			.table{
+				border: 1px solid #ccc;
+				border-collapse: collapse;
+			}
+			.table th,.table td{
+				border: 1px solid #CCCCCC;
+				padding: 1px 6px;
+			}
+			.table th{
+				background-color:#44546B;
+				color: #FFFFFF;
+				font-size: 14px;
+			}
+			.table tr:nth-child(even){
+				background-color:#D5DCE4 ;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="wrap">
+				<input type="text"/>
+				<button class="add">添加表格</button>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>表格内容</th>
+						<th>删除行</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>表格内容1</td>
+						<td><a href="javascript:;" class="del">删除</a></td>
+					</tr>
+					<tr>
+						<td>表格内容2</td>
+						<td><a href="javascript:;" class="del">删除</a></td>
+					</tr>
+					<tr>
+						<td>表格内容3</td>
+						<td><a href="javascript:;" class="del">删除</a></td>
+					</tr>
+					<tr>
+						<td>表格内容4</td>
+						<td><a href="javascript:;" class="del">删除</a></td>
+					</tr>
+					<tr>
+						<td>表格内容5</td>
+						<td><a href="javascript:;" class="del">删除</a></td>
+					</tr>
+				</tbody>
+				
+			</table>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var oWrap = document.getElementsByClassName("wrap")[0],
+					oInput = oWrap.getElementsByTagName("input")[0],
+					oAdd = oWrap.getElementsByTagName("button")[0],
+					oTable = document.getElementsByTagName("table")[0],
+					oTbody = oTable.getElementsByTagName("tbody")[0];
+				oAdd.onclick = function(){
+					if(oInput.value == ""){
+						alert("请输入表格内容");
+						return false;
+					}
+					oTbody.appendChild(creatTr(oInput.value));
+				}
+				oTable.onclick = function(e){
+					var e = window.event || e;
+					if(e.target.className == "del"){
+						var oTr = e.target.parentNode.parentNode;
+						oTbody.removeChild(oTr);
+					}
+				}
+				function creatTr(value){
+					var oTr = document.createElement("tr");
+					oTr.innerHTML = "<td>"+value+"</td>"+
+									"<td><a href='javascript:;' class='del'>删除</a></td>";
+					return oTr;
+				}
+			})()
+		}
+	</script>
+</html>

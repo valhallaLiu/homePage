@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片放大镜</title>
+		<style type="text/css">
+			div{
+				float: left;
+				margin-right: 20px;
+				overflow: hidden;
+			}
+			.small-pic{
+				width: 350px;
+				height: 220px;
+				position: relative;
+				cursor:  crosshair;
+			}
+			.big-pic{
+				width:180px;
+				height:180px;
+				border: 1px solid #ccc;
+				visibility: hidden;
+				position: relative;
+			}
+			.img-big{
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.float-layer{
+				position: absolute;
+				width: 78px;
+				height: 78px;
+				border: 1px solid #333;
+				background-color: rgba(255,255,255,0.3);
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="small-pic">
+			<span class="float-layer"></span>
+			<img src="img/samll.jpg" alt="小图片" class="img-small"/>
+		</div>
+		<div class="big-pic">
+			<img src="img/big.jpg" alt="大图片" class="img-big" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var aImg = document.getElementsByTagName("img"),
+					aDiv = document.getElementsByTagName("div"),
+					oSpan = document.getElementsByTagName("span")[0];
+				aDiv[0].onmouseover = function(){
+					oSpan.style.display = "block";
+					aDiv[1].style.visibility = "visible";
+				}
+				aDiv[0].onmousemove = function(e){
+					var e = window.event || e;
+					changePosition(e,aDiv[0],oSpan,aDiv[1],aImg[1]);
+					
+				}
+				aDiv[0].onmouseout = function(){
+					oSpan.style.display = "none";
+					aDiv[1].style.visibility = "hidden";
+				}
+				function changePosition(e,pElem,cElem,zWrap,zImg){
+					//图片浮动层实现
+					var x = pElem.offsetLeft,
+						y = pElem.offsetTop,
+						pWidth = pElem.offsetWidth,
+						pHeight = pElem.offsetHeight,
+						cWidth = cElem.offsetWidth,
+						cHeight = cElem.offsetHeight;
+					var left = e.clientX - x - cWidth/2,
+						top = e.clientY - y - cHeight/2;
+					if(left<0){
+						left = 0;
+					}else if(left>(pWidth-cWidth)){
+						left =pWidth-cWidth;
+					}
+					if(top<0){
+						top = 0;
+					}else if(top>(pHeight-cHeight)){
+						top = 140;
+					}
+					oSpan.style.left = left +"px";
+					oSpan.style.top = top +"px"; 
+					//放大镜效果实现
+					var wWidth = zWrap.offsetWidth,
+						wHeight = zWrap.offsetHeight,
+						iWidth = zImg.offsetWidth,
+						iHeight = zImg.offsetHeight;
+					zLeft = -(iWidth-wWidth)/(pWidth-cWidth)*left;
+					zTop = -(iHeight-wHeight)/(pHeight-cHeight)*top;
+					zImg.style.left = zLeft +"px";
+					zImg.style.top = zTop +"px";						
+				}
+			})()
+		}
+	</script>
+</html>

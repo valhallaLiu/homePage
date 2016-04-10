@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>经典轮播图</title>
+		<link rel="stylesheet" type="text/css" href="css/2.css" />
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="innder-banner">
+				<div class="prev banner-btn"></div>
+				<ul class="clearfix bannar-list">
+					<li class="list-item"><a href="javascript:;"><img src="img/2/1.jpg" alt/></a></li>
+					<li class="list-item"><a href="javascript:;"><img src="img/2/2.png" alt/></a></li>
+					<li class="list-item"><a href="javascript:;"><img src="img/2/3.jpg" alt/></a></li>
+					<li class="list-item"><a href="javascript:;"><img src="img/2/4.png" alt/></a></li>
+					<li class="list-item"><a href="javascript:;"><img src="img/2/5.jpg" alt/></a></li>
+				</ul>
+				<div class="banner-dot">
+					<a href="javascript:;" class="dot active"></a>
+					<a href="javascript:;" class="dot"></a>
+					<a href="javascript:;" class="dot"></a>
+					<a href="javascript:;" class="dot"></a>
+					<a href="javascript:;" class="dot"></a>
+				</div>
+				<div class="next banner-btn"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		(function(){
+			var oWrap = document.getElementById("wrap"),
+				oBanner = oWrap.querySelector(".innder-banner"),
+				oList = oWrap.querySelector(".bannar-list");
+			setInterval(function(){
+				act(oList,"left",-980);
+				
+			},1000);
+			function act(obj,attr,target,fn){
+				
+				clearInterval(obj.timer);
+				obj.timer = setInterval(function(){
+					var cur = parseInt(css(obj,attr)),
+						speed = (target - cur)/4;
+					speed = speed>0?Math.ceil(speed):Math.floor(speed);
+					obj.style[attr] = cur + speed + "px";
+					console.log(speed);
+					if(cur == target){
+						clearInterval(obj.timer);
+						obj.timer = null;
+						fn && fn();
+					}
+				},50);
+			}
+			function css(obj,attr){
+				if(obj.currentStyle){
+					return obj.currentStyle[attr];
+				}else{
+					return getComputedStyle(obj)[attr];
+				}
+			}
+		})()
+	</script>
+</html>

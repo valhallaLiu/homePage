@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>全国各省市下拉框动态操作</title>
+		<style type="text/css">
+			.city{
+				visibility: hidden;
+			}
+			.area{
+				visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<form class="form">
+			<select class="province">
+				<option value="0">请选择</option>
+			</select>
+			<select class="city">
+				<option value="0">请选择</option>
+			</select>
+			<select class="area">
+				<option value="0">请选择</option>
+			</select>
+		</form>
+		
+	</body>
+	<script type="text/javascript">
+		window.onload = (function(){
+			var aSelect = document.getElementsByTagName("select"),
+				url = "data/P&C-min.json";
+			//三层嵌套，可改写为无限层嵌套
+			getData(url,function(data){
+				fillDate(data,aSelect[0],"name");
+				var str = "选择的地区为:";
+				aSelect[0].onchange = function(){
+					str += this.value +"-";
+					aSelect[1].innerHTML = '<option value="0">请选择</option>';
+					aSelect[2].innerHTML = '<option value="0">请选择</option>';
+					var i = getNum(data,this.value,"name");
+					if(this.value !=0){
+						var cities = data[i]["city"];
+						aSelect[1].style.visibility = "visible";
+						fillDate(cities,aSelect[1],"name");
+					}else{
+						aSelect[1].style.visibility = "hidden";
+						aSelect[2].style.visibility = "hidden";
+					}
+					aSelect[1].onchange = function(){
+						str += this.value +"-";
+						aSelect[2].innerHTML = '<option value="0">请选择</option>';
+						var data = cities;
+						var i = getNum(data,this.value,"name");
+						if(this.value !=0){
+							var areas = data[i]["area"];
+							aSelect[2].style.visibility = "visible";
+							fillDate(areas,aSelect[2]);
+						}else{
+							aSelect[2].style.visibility = "hidden";
+						}
+						aSelect[2].onchange = function(){
+							str += this.value;
+							alert(str);
+							str = "";
+						}
+					}
+				}
+			})
+			function getData(url,fn){
+				var xhr = null;
+				if(window.XMLHttpRequest){
+					xhr = new window.XMLHttpRequest();
+				}else{
+					xhr = ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xhr.open("GET",url);
+				xhr.send();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4){
+						if(xhr.status == 200 || xhr.status == 304){
+							var data = JSON.parse(xhr.responseText);
+							fn && fn(data);
+						}
+					}
+				}
+			}
+			//data-需要填充的数据，obj-需要填充的select对象，name-需要填充数据的属性名
+			function fillDate(data,obj,name){
+				var length = data.length;
+				for(var i=0;i<length;i++){
+					if(name){
+						obj.innerHTML += "<option>"+data[i][name]+"</option>"
+					}else{
+						obj.innerHTML += "<option>"+data[i]+"</option>"
+					}
+					
+				}
+			}
+			function getNum(data,value,name){
+					for(var i=0;i<data.length;i++){
+						if(value == data[i][name]){
+							return i;
+						}
+					}
+			}
+		})()
+	</script>
+</html>

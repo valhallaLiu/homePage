@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>可拖动的弹出层弹框</title>
+		<!--<link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet">-->
+		<style type="text/css">
+			.wrap{
+				padding:10px 0;
+			}
+			.container{
+				margin-top: 40px;
+			}
+			#dailog{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.ui-dailog{
+				position: fixed;
+				text-align: center;
+				width: 500px;
+				min-height: 150px;
+				left: 50%;
+				top: 50%;
+				-webkit-transform: translate(-50%,-50%);
+				z-index: 10;
+				background-color: #fafafa;
+				border-radius: 4px;
+			}
+			.dailog-title h2{
+				font-size: 18px;
+				font-weight: 400;
+				height: 50px;
+				line-height: 50px;
+			}
+			.dailog-main{
+				line-height: 1.2em;
+				padding: 5px 10px;
+				text-align: center;
+				color: #999;
+			}
+			.dailog-footer{
+				position: absolute;
+				width: 100%;
+				height: 40px;
+				line-height: 40px;
+				border-top: 1px solid #e1e1e1;
+				bottom: 0;
+				display: flex;
+			}
+			.dailog-footer a{
+				flex: 1;
+				-webkit-flex: 1;
+				-webkit-box-flex: 1;
+				text-decoration: none;
+			}
+			.dailog-confirm{
+				position: relative;
+			}
+			.dailog-confirm:hover{
+				color: #1E9E54;
+			}
+			.dailog-confirm:before{
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 1px;
+				height: 100%;
+				border-left: 1px solid #e1e1e1;
+			}
+			.mask{
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 5;
+				background-color: rgba(0,0,0,0.7);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row wrap">
+				<div class="col-sm-9 col-sm-offset-3">
+					<button class="btn btn-default">默认弹框</button>
+					<button class="btn btn-primary">confirm弹框</button>
+					<button class="btn btn-success">alert弹框</button>
+					<button class="btn btn-info">延时弹框</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		(function(window){
+			function Dailog(config){
+				var _this_ = this;
+				this.config = {
+					title:"弹出框标题",
+					width:500,
+					height:150,
+					backgroundColor:"#fafafa",
+					massage:"弹出框消息",
+					cancelText:"取消",
+					confirmText:"确认",
+					type:0, //type取值：0-默认，1-确认类弹框，2-警告类弹框，3-延迟消失类弹框
+					confirm:true,
+					fn:function(){
+						if(_this_.config.confirm){
+							alert("此时执行确认后的事件");
+						}else{
+							alert("此时执行取消后的事件");
+						}
+					}
+				}
+				extend(this.config,arguments[0]);
+				this.render();
+				switch(this.config.type){
+					case 2:
+						this.alert();
+						break;
+					case 1:
+						this.confirm();
+						break;
+					case 3:
+						this.message();
+						break;
+				}
+				//类似于jq的extend方法
+				function extend(obj1,obj2){
+					for(var x in obj2){
+						for(var y in obj1){
+							if(x == y){
+								obj1[y] = obj2[y];
+							}
+						}
+					}
+				}
+			}
+			Dailog.prototype = {
+				render:function(){
+					//拼接弹窗字符串
+					var dailogBox = '<div class="ui-dailog">'+
+										'<div class="dailog-title">'+
+											'<h2>'+this.config.title+'</h2>'+
+										'</div>'+
+										'<div class="dailog-main">'+this.config.massage+'</div>'+
+										'<div class="dailog-footer" id="dailogFooter">'+
+											'<a href="javascript:;" class="dailog-cancel" id="dailogCancel">'+this.config.cancelText+'</a>'+
+											'<a href="javascript:;" class="dailog-confirm" id="dailogConfirm">'+this.config.confirmText+'</a>'+
+										'</div>'+
+									'</div>'+
+									'<div class="mask" id="dailogMask"></div>';
+					//插入body
+					var elem = document.createElement("div");
+					elem.id = "dailog";
+					elem.innerHTML = dailogBox;
+					document.body.appendChild(elem);
+					dailogCancel.onclick = function(){
+						document.body.removeChild(dailog);
+					}
+					dailogConfirm.onclick = function(){
+						document.body.removeChild(dailog);
+					}
+				},
+				//警告
+				alert:function(){
+					dailogCancel.style.display = "none";
+				},
+				//确认
+				confirm:function(){
+					var _this_ = this;
+					dailogCancel.onclick = function(){
+						document.body.removeChild(dailog);
+						_this_ .config.confirm = false;
+						_this_ .config.fn && _this_ .config.fn();
+					}
+					dailogConfirm.onclick = function(){
+						document.body.removeChild(dailog);
+						_this_ .config.confirm = true;
+						_this_ .config.fn && _this_ .config.fn();
+					}
+				},
+				//延迟消失
+				message:function(){
+					dailogFooter.style.display = "none";
+					var timer = setTimeout(function(){
+						document.body.removeChild(dailog);
+					},3000);
+				}
+			}
+			return window.Dailog = Dailog;
+		})(window);
+		//由于元素居中定位，所以drag方法不能通用
+		function drag(elem,pElem){
+			var startX = 0,
+				startY = 0,
+				mouseX = 0,
+				mouseY = 0,
+				cWidth = elem.offsetWidth,
+				cHeight = elem.offsetHeight,
+				pWidth = pElem.offsetWidth,
+				pHeight = pElem.offsetHeight,
+				leftTopEx = cWidth/2,
+				rightTopEx = pWidth - cWidth + cWidth/2,
+				leftBottomEx = cHeight/2,
+				rightBottomEx = pHeight - cHeight + cHeight/2,
+				canMove = false;
+				console.log(leftTopEx,leftBottomEx);
+			elem.onmousedown = function(e){
+				var e = window.event || e;
+				startX = elem.offsetLeft;
+				startY = elem.offsetTop;
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				canMove = true;
+				//console.log(startX,startY,mouseX,mouseY,pElem.offsetWidth,pElem.offsetHeight);
+				
+			}
+			elem.onmousemove = function(e){
+				if(!canMove){
+					return false;
+				}
+				var e = window.event || e;
+				var curX = e.clientX,
+					curY = e.clientY,
+					left = startX +(curX-mouseX),
+					top = startY +(curY-mouseY);
+					if(left<leftTopEx){
+						left = leftTopEx;
+					}else if(left >=rightTopEx){
+						left = rightTopEx;
+					}
+					if(top<leftBottomEx){
+						top = leftBottomEx;
+					}else if(top>=rightBottomEx){
+						top = rightBottomEx;
+					}
+					elem.style.left = left + "px";
+					elem.style.top = top + "px";
+			}
+			elem.onmouseup = function(){
+				canMove = false;
+			}
+		}
+		function bind(){
+			var uiDailog = dailog.getElementsByClassName("ui-dailog")[0];
+			drag(uiDailog,dailog);
+		}
+		window.onload = function(){
+			(function(){
+				var aBtn = document.getElementsByTagName("button");
+				aBtn[0].onclick = function(){
+					var box = new Dailog({
+						title:"默认弹出框"
+					})
+					//给元素绑定拖拽事件
+					bind();
+				}
+				aBtn[1].onclick = function(){
+					var box = new Dailog({
+						title:"确认弹出框",
+						type:1
+					})
+					bind();
+				}
+				aBtn[2].onclick = function(){
+					var box = new Dailog({
+						title:"警告弹出框",
+						type:2
+					})
+					bind();
+				}
+				aBtn[3].onclick = function(){
+					var box = new Dailog({
+						title:"延时消失弹出框",
+						massage:"3s后弹框自动关闭",
+						type:3
+					})
+					bind();
+				}
+			})()
+		}
+	</script>
+</html>

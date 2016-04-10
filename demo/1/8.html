@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文本关键词过滤</title>
+		<style type="text/css">
+			body{
+				font-size: 16px;
+			}
+			.warn-keyword{
+				color: #f00;
+				font-size: 12px;
+				margin: 10px 0;
+				visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<label for="input-keyword">添加需要过滤的词汇</label>
+		<input type="text" name="input-keyword" id="input-keyword" maxlength="6"/>
+		<button class="btn-keyword">确定</button>
+		<div class="warn-keyword">输入内容不能为空</div>
+		<h2>输入内容</h2>
+		<textarea rows="10" cols="47" class="input-text"></textarea>
+		<button class="btn-filter">点击过滤文本</button>
+		<h2>过滤结果</h2>
+		<textarea rows="10" cols="47" class="filter"></textarea>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var oKeyword = document.getElementById("input-keyword"),
+					aBtn = document.getElementsByTagName("button"),
+					oWarn = document.getElementsByTagName("div")[0],
+					aTextarea = document.getElementsByTagName("textarea"),
+					arr = ["盗版","日本"];
+					addKeyword(arr,aTextarea[0]);
+					aBtn[0].onclick = function(){
+						if(oKeyword.value == ""){
+							oWarn.innerText = "输入内容不能为空";
+							oWarn.style.visibility = "visible";
+							return false;
+						}else if(isKeywordRepeated(oKeyword.value,arr)){
+							oWarn.innerText = "输入内容重复了";
+							oWarn.style.visibility = "visible";
+							return false
+						}else{
+							arr.push(oKeyword.value);
+							addKeyword(arr,aTextarea[0]);
+							oWarn.innerText = "成功加入屏蔽词汇";
+							oWarn.style.visibility = "visible";
+						}
+					}
+					oKeyword.onfocus = function(){
+						oWarn.style.visibility = "hidden";
+					}
+					aBtn[1].onclick = function(){
+						var str = aTextarea[0].value,
+							reg = "",
+							star = "";
+						for(var i=0;i<arr.length;i++){
+							for(var j=0;j<arr[i].length;j++){
+								star += "*";
+							}
+							reg = eval("/"+arr[i]+"/g")
+							str = str.replace(reg,star);
+							star = "";
+						}
+						aTextarea[1].value = str;
+					}
+					function addKeyword(array,obj){
+						obj.placeholder = "";
+						for(var i=0;i<array.length;i++){
+							if(i == array.length-1){
+								obj.placeholder += array[i];	
+							}else{
+								obj.placeholder += array[i]+"|";
+							}
+						}
+						obj.placeholder += " 将会被过滤";
+					}
+					function isKeywordRepeated(str,arr){
+						for(var i=0;i<arr.length;i++){
+							if(arr[i] == str){
+								return true;
+							}
+						}
+						return false;
+					}
+			})()
+		}
+	</script>
+</html>

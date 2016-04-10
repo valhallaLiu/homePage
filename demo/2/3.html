@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>点击放大图片并居中</title>
+		<style type="text/css">
+			body{
+				padding: 0;
+				margin: 0;
+			}
+			div{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.small-pic{
+				width: 350px;
+				height: 220px;
+				overflow: hidden;
+				cursor: pointer;
+				position: absolute;
+				margin-left: 0;
+				margin-top: 0;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<img src="img/big.jpg" alt="需要点击的小图" class="small-pic"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var oDiv = document.getElementsByTagName("div")[0],	
+					oImg = oDiv.getElementsByTagName("img")[0];
+					isBig = false;
+				oImg.onclick = function(){
+					var left = oDiv.offsetWidth/2,
+						top = oDiv.offsetHeight/2;
+					if(isBig){
+						animation(oImg,{"width":350,"height":220,"left":0,"top":0,"marginLeft":0,"marginTop":0})
+						isBig = false;
+					}else{
+						animation(oImg,{"width":800,"height":504,"left":left,"top":top,"marginLeft":-400,"marginTop":-252})
+						isBig = true;
+					}
+				}
+				function css(obj,attr){
+					if(obj.currentStyle){
+						return obj.currentStyle[attr];
+					}else{
+						return getComputedStyle(obj)[attr];
+					}
+				}
+				function animation(obj,settings){
+					clearInterval(obj.timer);
+					obj.timer = setInterval(function(){
+						var stop = true;
+						for(var x in settings){
+							var cur = parseInt(css(obj,x));
+							var speed = (settings[x] - cur)/10;
+							speed = speed>0?Math.ceil(speed):Math.floor(speed);
+							cur += speed;
+							obj.style[x] = cur + "px";
+							if(cur != settings[x]){
+								stop = false;
+							}
+							if(stop){
+								clearInterval(obj.timer);
+								obj.timer = null;
+							}
+						}
+					},30);
+				}
+				
+			})()
+		}
+	</script>
+</html>

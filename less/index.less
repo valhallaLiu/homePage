@@ -1,0 +1,524 @@
+//reset
+@import "reset";
+@import "base";
+
+a{
+    text-decoration: none;
+}
+html,body{
+    overflow: hidden;
+}
+//通用样式
+body{
+    font-size: 12px;
+}
+.wrap{
+    padding-top: 35px;
+    margin:0 20px
+}
+.title{
+     font-size: 2.5em;
+     color: #42474B;
+     padding-bottom: 20px;
+}
+.btn{
+    display: block;
+    width: 150px;
+    height: 50px;
+    margin:0 auto;
+    text-align: center;
+    line-height: 48px;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 4px; 
+}
+@media only screen and (min-width:960px){
+    body{
+        font-size: 16px;
+    }
+    .wrap{
+        max-width: 980px;
+        margin:0 auto;
+    }
+    .btn{
+         min-width: 250px;
+    }
+
+}
+//页面样式
+#content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #FFF;
+    font-weight: 700;
+    text-align: center;
+}
+/* #################################################################################################################################### */
+/* ### Main Menu 主菜单页面                                                         */
+/* #################################################################################################################################### */
+#main-menu{
+    z-index: 999;
+    position: absolute;
+    left: 0;
+    bottom: 40px;
+    width: 100%;
+    height: 100%;
+    background-color: #343e43;
+    transition: transform 0.5s ease;
+    -webkit-transition: transform 0.5s ease;
+    -ms-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    .vcenter{
+        position: relative;
+        display: table;
+        width: 100%;
+        height:100%;
+    }
+    .hcenter{
+        text-align: center;
+        display: table-cell;
+        vertical-align:middle;
+    }
+    .main-nav{
+        padding-top:80px;
+        padding-bottom:20px;
+        display: inline-block;
+        text-align: left;
+        li{
+            padding:10px 0;
+        }
+        a{
+            color: #fff;
+            font-size: 30px;
+            transition: color 0.5s ease;
+        }
+        a:hover{
+            color: #e4393c;
+        }
+        .active{
+            color: #e4393c;
+        }
+    }
+}
+#main-menu.open{
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+}
+@media only screen and (min-width:640px){
+
+}
+@media only screen and (min-width:960px){
+      #main-menu{
+        width: 33.333%;
+        bottom: 60px;
+     }
+}
+/* #################################################################################################################################### */
+/* ### Bottom Bar 页面底部栏                                                             */
+/* #################################################################################################################################### */
+#bottom-bar{
+    z-index: 999;
+    background-color: #2f3724;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    .main-menu-button,.next-button{
+        position: absolute; 
+        top: 5px;
+    }
+    .main-menu-button{
+        left: 10px;
+    }
+    .next-button{
+        right: 10px;
+    }
+    .icon{
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        border:2px solid #444b55;
+        border-radius: 50%;
+        background-size: 100% auto;
+    }
+    .menu{
+        background-image: url(../img/icon/main_nav_icon.png);
+        background-position: center top;
+    }
+    span.icon-change{
+        background-position: center bottom;
+    }
+    .next{
+        background-image: url(../img/icon/up_down_icon.png);
+        background-position: center top;
+    }
+}
+@media only screen and (min-width:960px){
+    #bottom-bar{
+        height: 60px;
+        .icon{
+            width: 50px;
+            height: 50px; 
+
+        }
+    }
+}
+/* #################################################################################################################################### */
+/* ### 内容页共用样式                                               */
+/* #################################################################################################################################### */
+section{
+    z-index: 888;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.animate{
+    transition: transform 1s ease;
+    -webkit-transition: all 1s ease;
+}
+.state0{
+//  top: 100%;
+    transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+}
+.state1{
+//  top: 0;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+}
+.state2{
+//  top:-50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+/* #################################################################################################################################### */
+/* ###homepage 主页                                                  */
+/* #################################################################################################################################### */
+.home{
+    background: url(../img/bg/bg-home.jpg) no-repeat;
+    background-size: cover;
+    img{
+        position: absolute;
+        left: 50%;
+        top:50%;
+    }
+    .home-log{
+        width: 100px;
+        margin-left: -50px;
+        margin-top:-150px
+    }
+    .home-name{
+        width: 200px;
+        margin-left: -100px;
+    }
+}
+@media only screen and (min-width:960px){
+    .home{
+        .home-log{
+           width: 200px;
+           margin-left: -100px; 
+           margin-top:-250px
+        }
+        .home-name{
+            width: 400px;
+            margin-left: -200px;
+            
+        }
+    }
+}
+/* #################################################################################################################################### */
+/* ### skiis Page 专业技能页                                                 */
+/* #################################################################################################################################### */
+.skills{
+    background-color: #FCFCFC;
+    .skill-list{
+        line-height: 1.6;
+    }
+    .skill-item{
+        margin-bottom: 10px;
+        position: relative;
+        h3{
+            font-size: 1.4em;
+            font-weight: 600;
+            width: 0%;
+            height: 40px;
+            line-height: 40px;
+            text-indent: 1rem;
+            text-align: left;
+            transition: all 1.5s ease;
+        }
+    }
+    .skill-info{
+        padding: 20px;
+        position: absolute;
+        left: 150px;
+        top: 12px;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 0 3px rgba(0,0,0,0.3);
+        border-radius: 5px;
+        z-index: 999;
+        color: #666;
+        font-weight: 400;
+        text-align: left;
+        overflow: hidden;
+        display: none;
+    }
+    .skills-js{
+        background-color: @jsColor ;
+        border-left: 3px solid @jsColorB;
+    }
+    .skills-css{
+        background-color: @cssColor ;
+        border-left: 3px solid @cssColorB;
+    }
+    .skills-html{
+        background-color: @htmlColor ;
+        border-left: 3px solid @htmlColorB;
+    }
+    .skills-ps{
+        background-color: @psColor ;
+        border-left: 3px solid @psColorB;
+    }
+    .skills-php{
+        background-color: @phpColor ;
+        border-left: 3px solid @phpColorB;
+    }
+    .skills-mysql{
+        background-color:@mysqlColor ;
+        border-left: 3px solid @mysqlColorB;
+    }
+}
+@media only screen and (min-width:960px){
+    .skills{
+        .skill-item{
+            margin-bottom: 25px;
+        } 
+    }
+}
+/* #################################################################################################################################### */
+/* ### work experence 工作经历                                              */
+/* #################################################################################################################################### */
+
+.experence{
+    background: url(../img/bg/bg-skills.png) repeat;
+}
+.experence-wrap{
+    position: relative;
+    height: 100%;
+}
+.job-wrap{
+    position: relative;
+}
+.experence-line{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-right: 2px solid #aab2bd;
+    z-index: 1;
+    //display: none;
+}
+.time-point{
+    width: 120px;
+    padding: 3px 5px;
+    text-align: center;
+    background-color: #aab2bd;
+    border-radius: 4px;
+    margin: 0 auto;
+}
+.job-wrap-inner{
+    position: relative;
+    z-index: 10;
+}
+.job-info{
+    background-color: #fff;
+    width: 90%;
+    border-radius: 4px;
+    box-shadow: 0 0 8px #ccc;
+    margin:15px;
+    padding:5px;
+    color: #333;
+}
+.job-left{
+    float: none;
+}
+.job-right{
+    float: none;
+}
+.job-img{
+    display: none;
+}
+.job-text{
+    text-align: left;
+    padding-left: 8px;
+    overflow: hidden;
+    h3{
+        font-size: 1.2em;
+        font-weight: 600;
+        padding-bottom: 4px;
+    }
+    p{
+        font-size: 1em;
+        font-weight: 500;
+        line-height: 1.5em;
+    }
+    .job-company-detail{
+        display: none;
+    }
+}
+@media only screen and (min-width:960px){
+    .experence-line{
+        display: block;
+    }
+    .job-info{
+        width: 45%;
+        .job-company-detail{
+        display: block;
+        }
+    }
+    .job-left{
+       float: left;
+    }
+    .job-right{
+       float: right;
+    }
+    .job-img{
+        display: block;
+        float: left;
+        height: 100%;
+        overflow: hidden;
+        img{
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+/* #################################################################################################################################### */
+/* ### work experence 项目经验                                           */
+/* #################################################################################################################################### */
+.main3{
+    background-color: yellow;
+}
+/* #################################################################################################################################### */
+/* ### work experence 个人相册                                             */
+/* #################################################################################################################################### */
+.album{
+    background: url(../img/bg/placeholder.png);
+    background-size: cover;
+    background-position: center;
+}
+.album-nav{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 10px;
+    height: 60px;
+    .album-logo{
+        margin-left: 10px;
+        width: 92px;
+        height: 100%;
+        float: left;
+        background: url(../img/pillar-liu/pillar-liu.png) center no-repeat;
+        background-size: contain;
+    }
+    .nav-right{
+        height: 100%;
+        float: right;
+        margin-top: 15px;
+    }
+    .album-login,.album-regist{
+        font-family: "microsoft yahei";
+        color: #fff;
+        font-size: 1.2em;
+        float: left;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 15px;
+        margin-left: 10px;
+    }
+}
+.album-wrap{
+    padding: 15vh 10px 0 10px;
+    h1{
+        margin:  0 auto 20px auto;
+        font-size: 2em;
+        line-height: 1em;
+    }
+    h2{
+        font-family: "microsoft yahei";
+        margin:  0 auto 40px auto;
+        font-size: 1.5em;
+    }
+    .album-btn{
+        background-color: #0099e5; 
+    }
+}
+@media only screen and (min-width:960px){
+    .album-nav{
+        padding: 0 30px;
+    }
+    .album-wrap{
+        padding: 25vh 10px 0 10px;
+        a.album-btn{
+            min-width: 250px;
+        }
+        .album-btn:hover{
+            background-color: #08c;
+        }
+    }
+}
+/* #################################################################################################################################### */
+/* ### 游戏页面                                       */
+/* #################################################################################################################################### */
+.main5{
+    background-image: url(../img/bg/placeholder.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-color: #000000;
+    background-size: cover;
+}
+.game-btn{
+    background-color: rgba(255,255,255,0.2);
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.game-hover{
+    display: none;
+}
+@media only screen and (min-width:960px){
+    .main5{
+        background-size: cover;
+    }
+    .game-btn{
+        display: none;
+    }
+    .game-hover{
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+/* #################################################################################################################################### */
+/* ### 个人插件                                          */
+/* #################################################################################################################################### */
+.main6{
+    background-color: sandybrown;
+}
+
+
+
+

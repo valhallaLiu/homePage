@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>去除字符串左右的空格</title>
+	</head>
+	<style type="text/css">
+		input{
+			width: 300px;
+			height: 40px;
+			outline: none;
+			font-size: 16px;
+		}
+		a{
+			display: inline-block;
+			width: 100px;
+			height: 40px;
+			background-color: #0088CC;
+			text-align: center;
+			color: #FFFFFF;
+			font-size: 16px;
+			line-height: 40px;
+			cursor: pointer;
+			border-radius: 4px;
+		}
+		a:hover{
+			background-color: #0099E5;
+		}
+	</style>
+	<body>
+		<input type="text" class="input-txt"  value="   左边和右边分   别有三个空格   "/>
+		<a class="input-btn">点击去除</a>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var oInput = document.getElementsByClassName("input-txt")[0],
+					oBtn = document.getElementsByClassName("input-btn")[0];
+					oBtn.onclick = function(){
+						oInput.value = oInput.value.replace(/^\s*|\s*$/g,"");
+					}
+			}())
+		}		
+	</script>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+		<style type="text/css">
+			body,ul,h3,p{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				font: 12px/1.125 arial,helvetica,sans-serif;
+				background-color: #ccc;
+			}
+			ul,li{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			.clearfix:after{
+				content: "";
+				clear: both;
+				display: table;
+			}
+			.clearfix{
+				zoom: 1;
+			}
+			#banner{
+				position: relative;
+				width:757px;
+				height: 303px;
+				margin: 20px auto 0;
+				overflow: hidden;
+			}
+			#banner .bannar-wrap{
+				width: 10000px;
+			}
+			#banner .banner-arror{
+				position: absolute;
+				top: 60px;
+				width: 65px;
+				height: 65px;
+				background-image: url(img/icon/banner-arrow.png);
+				cursor: pointer;
+				display: none;
+			}
+			#banner:hover .banner-arror{
+				display: block;
+			}
+			#banner .next{
+				right: 0;
+				background-position: 0 -159px;
+			}
+			#banner .prev{
+				left: 0;
+				background-position: 0 -224px;
+			}
+			#banner .banner-item{
+				width: 237px;
+				margin-right: 23px;
+				float: left;
+			}
+			 
+			#banner .banner-item-img{
+				display: block;
+			}
+			#banner .info-title{
+				position: relative;
+			}
+			#banner .title-no{
+				float: left;
+				padding-right: 14px;
+				font-size: 52px;
+				line-height: 52px;
+				color: #fff;
+			}
+			#banner .info-name{
+				font-size: 18px;
+				line-height: 30px;
+			}
+			#banner .info-type{
+				font-size: 16px;
+				line-height: 22px;
+			}
+			#banner .info-start{
+				position: absolute;
+				right: 0;
+				top: 12px;
+				display: none;
+				width: 75px;
+				height: 28px;
+				line-height: 28px;
+				background-color: #ff7a01;
+				border:1px solid #d45f00;
+				text-align: center;
+				color: #fff;
+			}
+			#banner .banner-item:hover .info-start{
+				display: block;
+			}
+			#banner .info-text{
+				font-size: 14px;
+				line-height: 16px;
+				padding-top: 8px;
+			}
+		</style>
+	<body>
+		<div id="banner">
+			<div class="banner-arror prev"></div>
+			<ul class="clearfix bannar-wrap">
+				<li class="banner-item">
+                   <a class="banner-item-img" href="javscript:;"><img src="img/1.jpg"/></a>
+                   <div class="banner-item-info">
+                   	<div class="info-title clearfix">
+                   		<span class="title-no">1</span>
+                   		<h3 class="info-name" >剑宗</h3>
+                   		<span class="info-type" >角色扮演</span>
+                   		<a href="javascript:;" class="info-start">开始游戏</a>
+                   		<p class="info-text">大型3D武侠修仙网页游戏，全视角3D战斗！</p>
+                   	</div>
+                   </div>
+                </li>
+                <li class="banner-item">
+                   <a class="banner-item-img" href="javscript:;"><img src="img/2.jpg"/></a>
+                   <div class="banner-item-info">
+                   	<div class="info-title clearfix">
+                   		<span class="title-no">2</span>
+                   		<h3 class="info-name" >剑宗</h3>
+                   		<span class="info-type" >角色扮演</span>
+                   		<a href="javascript:;" class="info-start">开始游戏</a>
+                   		<p class="info-text">大型3D武侠修仙网页游戏，全视角3D战斗！</p>
+                   	</div>
+                   </div>
+                </li>
+                <li class="banner-item">
+                   <a class="banner-item-img" href="javscript:;"><img src="img/3.jpg"/></a>
+                   <div class="banner-item-info">
+                   	<div class="info-title clearfix">
+                   		<span class="title-no">3</span>
+                   		<h3 class="info-name" >剑宗</h3>
+                   		<span class="info-type" >角色扮演</span>
+                   		<a href="javascript:;" class="info-start">开始游戏</a>
+                   		<p class="info-text">大型3D武侠修仙网页游戏，全视角3D战斗！</p>
+                   	</div>
+                   </div>
+                </li>
+                <li class="banner-item">
+                   <a class="banner-item-img" href="javscript:;"><img src="img/4.jpg"/></a>
+                   <div class="banner-item-info">
+                   	<div class="info-title clearfix">
+                   		<span class="title-no">4</span>
+                   		<h3 class="info-name" >剑宗</h3>
+                   		<span class="info-type" >角色扮演</span>
+                   		<a href="javascript:;" class="info-start">开始游戏</a>
+                   		<p class="info-text">大型3D武侠修仙网页游戏，全视角3D战斗！</p>
+                   	</div>
+                   </div>
+                </li>
+                <li class="banner-item">
+                   <a class="banner-item-img" href="javscript:;"><img src="img/5.jpg"/></a>
+                   <div class="banner-item-info">
+                   	<div class="info-title clearfix">
+                   		<span class="title-no">5</span>
+                   		<h3 class="info-name" >剑宗</h3>
+                   		<span class="info-type" >角色扮演</span>
+                   		<a href="javascript:;" class="info-start">开始游戏</a>
+                   		<p class="info-text">大型3D武侠修仙网页游戏，全视角3D战斗！</p>
+                   	</div>
+                   </div>
+                </li>
+                <li class="banner-item">
+                   <a class="banner-item-img" href="javscript:;"><img src="img/6.jpg"/></a>
+                   <div class="banner-item-info">
+                   	<div class="info-title clearfix">
+                   		<span class="title-no">6</span>
+                   		<h3 class="info-name" >剑宗</h3>
+                   		<span class="info-type" >角色扮演</span>
+                   		<a href="javascript:;" class="info-start">开始游戏</a>
+                   		<p class="info-text">大型3D武侠修仙网页游戏，全视角3D战斗！</p>
+                   	</div>
+                   </div>
+                </li>
+			</ul>
+			<div class="banner-arror next"></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		(function(){})();
+	</script>
+</html>

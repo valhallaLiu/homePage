@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>禁止用户输入中文</title>
+		<style type="text/css">
+			.sign{
+				margin:100px;
+				font-size: 16px;
+			}
+			.form-group{
+				margin-bottom: 10px;
+			}
+			.form-group label{
+				display: block;
+			}
+			.form-group input{
+				border: 1px solid#CCCCCC;
+				border-radius: 4px;
+				height: 26px;
+				line-height: 26px;
+				padding: 0 6px;
+				width: 226px;
+			}
+			.form-group .sign-error{
+				display: block;
+				visibility: hidden;
+				font-size: 12px;
+				color: #FF0000;
+			}
+			.form-group .sign-btn{
+				width: 147px;
+				height: 43px;
+				margin: 0 0 18px 0;
+				font-size: 18px;
+				color: #fff;
+				cursor: pointer;
+				font-weight: bold;
+				text-indent: -60px;
+				background-color: #4B4B4B;
+			}
+		</style>
+	</head>
+	<body>
+		<form class="sign">
+		<div class="form-group">
+			<label for="nickname">用户名:</label>
+			<input type="text" name="nickname" id="nickname" placeholder="请输入用户名"/>
+			<div class="sign-error sign-nickname">placeholder</div>
+		</div>
+		<div class="form-group">
+			<label for="password">密&nbsp;码:</label>
+			<input type="password" name="password" id="password" placeholder="请输入密码"/>
+			<div class="sign-error sign-password ">placeholder</div>
+		</div>
+		<div class="form-group">
+			<input type="submit" class="sign-btn" value="提交"/>
+		</div>
+		</form>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				oForm = document.getElementsByClassName("sign")[0],
+				aInput = oForm.getElementsByTagName("input");
+				for(var i=0;i<(aInput.length-1);i++){
+					aInput[i].onkeyup = function(){
+						this.value = this.value.replace(/[\u4e00-\u9fa5]/g, "");
+					}
+				}
+			})();
+		}
+		//监听onkeyup事件，将中文替换为空即可，/\D/g替换可只能输入数字
+	</script>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>选项卡轮播</title>
+		<style type="text/css">
+	        *{
+	        	margin:0;
+	        	padding:0;
+	        }
+	        body{ 
+	        	font:12px/1.125em Microsoft YaHei; 
+	        	background:#fff; 
+	        }
+	       	ul,li{
+	       		list-style: none;
+	       	}
+	        .clearfix:after{
+	        	content:"";
+	        	display: table;
+	        	clear: both;
+	        }
+	        .clearfix{
+	        	zoom: 1;
+	        }
+        	.wrap{
+        		width: 600px;
+        		height: 350px;
+        		margin: 10px auto;
+        		border: 1px solid #CCCCCC;
+        	}
+        	.inner{
+        		padding: 15px;
+        	}
+        	.nav li{
+        		float: left;
+        	}
+        	.nav-item{
+        		display: block;
+        		padding: 10px 30px;
+        		background-color: #f1f1f1;
+        		transition: all 0.5s linear;
+        		cursor:  pointer;
+        		color: #000;
+        	}
+        	.nav .active{
+        		background-color: #c40000;
+        		color: #fff;
+        	}
+        	
+        	.item-photo{
+        		float: left;
+        		width: 430px;
+        		overflow: hidden;
+        	}
+        	.main-item {
+        		display: none;
+        	}
+        	.main .active{
+        		display: block;
+        	}
+        	.item-photo .photo-wrap{
+        		width: 10000px;
+        	}
+        	.photo-wrap .photo-img{
+        		float: left;
+        		display: none;
+        	}
+        	.photo-wrap .active{
+        		display: block;
+        	}
+        	.photo-wrap img{
+        		width:430px;
+        	}
+        	.item-side{
+        		float: left;
+        	}
+        	.side-list-item{
+        		display: block;
+        		width: 140px;
+        		height: 40px;
+        		line-height: 40px;
+        		text-align: center;
+        		background-color: #f1f1f1;
+        		border-bottom: 1px solid #CCCCCC; 
+        		transition: all 0.5s linear;
+        		cursor: pointer;
+        	}
+        	.side-list .active{
+        		background-color: #333333;
+        		color: #FFFFFF;
+        	}
+    </style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="inner">
+				<div class="title">
+					<ul class="nav clearfix">
+						<li><a class="nav-item active">时尚女装</a></li>
+						<li><a class="nav-item">精美潮服</a></li>
+					</ul>
+				</div>
+				
+				<div class="main">
+					<div class="main-item active clearfix">
+						<div class="item-photo">
+							<div class="photo-wrap">
+								<a class="photo-img active" href="javascript:;">
+									<img src="img/hdhymjd.jpg"/>
+								</a>
+								<a class="photo-img"  href="javascript:;">
+									<img src="img/710x475.jpg"/>
+								</a>
+								<a class="photo-img"  href="javascript:;">
+									<img src="img/erz-sj-1112.jpg"/>
+								</a>
+							</div>
+						</div>
+						<div class="item-side">
+							<ul class="side-list">
+								<li><a class="side-list-item active">欧美羽绒</a></li>
+								<li><a class="side-list-item">经典男装</a></li>
+								<li><a class="side-list-item">全新女装</a></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="main-item  clearfix">
+						<div class="item-photo">
+							<div class="photo-wrap">
+								<a class="photo-img active" href="javascript:;">
+									<img src="img/jd5.jpg"/>
+								</a>
+								<a class="photo-img" href="javascript:;">
+									<img src="img/niuzaihuodong.jpg"/>
+								</a>
+								<a class="photo-img" href="javascript:;">
+									<img src="img/xiongyali.jpg"/>
+								</a>
+							</div>
+						</div>
+						<div class="item-side">
+							<ul class="side-list">
+								<li><a class="side-list-item active">超累男装</a></li>
+								<li><a class="side-list-item">休闲衬衫</a></li>
+								<li><a class="side-list-item">凡行动派</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var oNav = document.getElementsByClassName("nav")[0],
+					aNavItems = oNav.getElementsByClassName("nav-item"),
+				    oMain = document.getElementsByClassName("main")[0],
+					aMainItems = oMain.getElementsByClassName("main-item"),
+					aSideItems1 = aMainItems[0].getElementsByClassName("side-list-item"),
+					aSideItems2 = aMainItems[1].getElementsByClassName("side-list-item"),
+					aPhotoItems1 = aMainItems[0].getElementsByClassName("photo-img"),
+					aPhotoItems2 = aMainItems[1].getElementsByClassName("photo-img");
+					var num = 0,
+						num2 = 0,	
+						length1 = aNavItems.length; //上页切页的数量
+						length2 = aSideItems1.length; //下页切页的数量
+					var timer = setInterval(function(){
+						var styleStrs1 = [["nav-item","nav-item active"],["main-item  clearfix","main-item active clearfix"]],
+							styleStrs2 = [["side-list-item","side-list-item active"],["photo-img","photo-img active"]];
+							styleElems = [[aSideItems1,aPhotoItems1],[aSideItems2,aPhotoItems2]];
+						num2 = (num2<(length2-1))?++num2:0;
+						/*changeStyle(styleElems[num][0],styleElems[num][1],num2,styleStrs2);*/
+						changeStyle(styleElems[num][0],num2,styleStrs2[0]);
+						changeStyle(styleElems[num][1],num2,styleStrs2[1]);
+						if(num2 == 0){
+							num = (num<(length1-1))?++num:0;
+							/*changeStyle(aNavItems,aMainItems,num,styleStrs1);*/
+							changeStyle(aNavItems,num,styleStrs1[0]);
+							changeStyle(aMainItems,num,styleStrs1[1]);
+						}
+					},1500);
+				/*	function changeStyle(obj1,obj2,num,strs){
+						for(var i=0;i<obj1.length;i++){
+							obj1[i].className = strs[0];
+						}
+						obj1[num].className = strs[1];
+						for(var j=0;j<obj2.length;j++){
+							obj2[j].className = strs[2];
+						}
+						obj2[num].className = strs[3];
+					}*/
+					function changeStyle(obj,num,strs){
+						for(var i=0;i<obj.length;i++){
+							obj[i].className = strs[0];
+						}
+						obj[num].className = strs[1];
+					}
+			})()
+		}
+	</script>
+	
+</html>

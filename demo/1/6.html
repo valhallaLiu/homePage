@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>仿微博只能输入140个字符</title>
+		<style type="text/css">
+			.sign{
+				margin:100px;
+				font-size: 16px;
+			}
+			.form-group input{
+				border: 1px solid#CCCCCC;
+				border-radius: 4px;
+				height: 26px;
+				line-height: 26px;
+				padding: 0 6px;
+				width: 226px;
+			}
+			.form-group .sign-btn{
+				width: 147px;
+				height: 43px;
+				margin: 0 0 18px 0;
+				font-size: 18px;
+				color: #fff;
+				cursor: pointer;
+				font-weight: bold;
+				text-indent: -60px;
+				background-color: #4B4B4B;
+			}
+			.num-info{
+				font-style: italic;
+				font-size: 22px;
+				font-family: Constantia, Georgia;
+			}
+		</style>
+	</head>
+	<body>
+		<form class="sign">
+		<div class="form-group">
+			<div class="text-info"><span>还可以输入</span><span class="num-info">140</span>个字</div>
+			<textarea name="textarea" rows="10" cols="47" class="sign-text"></textarea>
+		</div>
+		<div class="form-group">
+			<input type="submit" class="sign-btn" value="提交"/>
+		</div>
+		</form>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				oForm = document.getElementsByClassName("sign")[0],
+				oTextarea = oForm.getElementsByClassName("sign-text")[0],
+				oTextInfo = oForm.getElementsByClassName("text-info")[0],
+				oInput = oForm.getElementsByClassName("sign-btn")[0],
+				oSpan = oTextInfo.getElementsByTagName("span");
+				oInput.onclick = function(){
+					return false;
+				}
+				oTextarea.onkeyup = function(){
+					if(this.value.length >= 140){
+						oSpan[1].style.color = "#f00";
+						oSpan[0].innerText = "已经超出了";
+					}
+					oSpan[1].innerText = Math.abs(140-this.value.length);
+				}
+			})()
+		}
+	</script>
+</html>

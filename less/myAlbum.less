@@ -1,0 +1,220 @@
+@import "reset.less";
+@import "base.less";
+@import "lightbox";
+body{
+    font-size: 16px;
+}
+@media only screen and (max-width:960px){
+    body{
+        font-size: 14px;
+    }
+}
+/* #################################################################################################################################### */
+/* ### 导航                                                   */
+/* #################################################################################################################################### */
+.main-nav{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+//**********导航条**************
+.nav-bar{
+    height: 50px;
+    width: 100%;
+    background-color: #222;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    .wrap{
+       width: 80%;
+       margin: 0 auto;
+       overflow: hidden;
+    }
+}
+//左侧logo
+.nav-left{
+   float: left;
+   .left-list{
+       float: left;
+   }
+}
+.main-link{
+    float: left;
+    height: 50px;
+}
+.main-logo{
+    display: block;
+    width: 80px;
+    height: 20px;
+    margin:15px 10px 0 0;
+    background-image: url(../img/pillar-liu/pillar-liu-small.png);
+    background-position: center;
+    
+}
+//左侧栏
+.left-list{
+    padding:0 20px; 
+    .index{
+        background-position: -1px 15px;
+        background-repeat: no-repeat;
+    }
+    .discover{
+        background-position: -28px 15px;
+        background-repeat: no-repeat;
+    }
+    .upload{
+        background-position: -52px 15px;
+        background-repeat: no-repeat;
+    }       
+}
+//左侧搜索
+.nav-search{
+    float: left;
+    width: 20%;
+    position: relative;
+    .query{
+        box-sizing: border-box;
+        width: 100%;
+        height: 26px;
+        margin-top: 12px;
+        padding:0 24px 0 8px;
+        color: #f7f8fa;
+        font-size: 0.9em;
+        background-color: #333333;
+        outline:none;
+        border-radius: 4px;
+        border: transparent 1px solid;
+    }  
+	.submit{
+        position: absolute;
+        top: 14px;
+        right: 2px;
+        width: 22px;
+        height: 22px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        background-position: -73px 2px;
+        background-repeat: no-repeat;
+    }
+}
+//右侧登陆
+.nav-profile{
+    float: right;
+}
+//li共用属性top
+.top{
+    float: left;
+    padding: 0 15px;
+    text-align: center;
+    height: 50px;
+     a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        line-height: 50px;
+        color: #B9C1C7;
+        font-family: "microsoft yahei";
+        font-weight: 600;
+    }
+    span{
+        box-sizing: border-box;
+        float: left;
+        width: 20px;
+        height: 50px;
+        padding-top: 15px;
+    }
+    strong{
+        margin-left: 10px;
+        float: left;
+        height: 50px;
+    }
+    .icon{
+    background-image: url(../img/icon/album-icon.png);
+    }
+}
+//手机端兼容
+@media only screen and (max-width:960px){
+   .left-list,.nav-profile{
+       display: none;
+   }
+   .nav-left{
+       width: 40%;
+   }
+   .nav-search{
+       width: 60%;
+   }
+   .main-logo{
+       background-image: url(../img/pillar-liu/pillar-liu-middle.png);
+       background-size: contain;
+   }
+}
+
+//**********导航项**************
+.navigation{
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+}
+.nav-area{
+    width: 30%;
+    margin:0 auto;
+}
+.nav-list{
+    box-sizing: border-box;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+    text-align: center;
+    a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: #666;
+        text-decoration: none;
+        font-size: 1em;
+        font-family: "microsoft yahei";
+        font-weight: 700;
+    }
+    &:hover,{
+        border-bottom: red solid 2px;
+    }
+}
+.active{
+    border-bottom: red solid 2px;
+}
+@media only screen and (max-width:960px){
+   .nav-area{
+        width: 80%;
+        margin:0 auto;
+    }
+}
+/* #################################################################################################################################### */
+/* ### 图片页样式                                     */
+/* #################################################################################################################################### */
+.photo-container{
+    padding: 20px 40px;
+    background-color: #f7f8fa;
+    position: relative;
+    top: 100px;
+}
+.photo-grird{
+    height: auto;
+    width:100%;
+    box-sizing: border-box;
+    position: relative;
+    margin-left: -5px;
+}
+.photo-thumbnail{
+    display: inline-block;
+    position: absolute;
+    img{
+        height: 100%;
+    }
+}
+@media only screen and (max-width:960px){
+  .photo-container{
+    padding: 10px;
+    background-color: #f7f8fa;
+    }
+}

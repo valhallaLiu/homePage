@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>段落文本自动滚动</title>
+		<style type="text/css">
+			body,h1,ul{
+				margin: 0;
+				padding: 0;
+			}
+			h1{
+				margin:10px 0 20px 20px;
+			}
+			ul,li{
+				list-style: none;
+			}
+			#wrap{
+				overflow: hidden;
+				height: 300px;
+			}
+			#ul{
+				overflow: hidden;
+				margin-left: 20px;
+				font-size: 16px;
+			}
+			#ul li{
+				line-height: 20px;
+			}
+			#btn-group{
+				margin-left: 20px;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>琵琶行</h1>
+		<div id="wrap">
+			<ul id="ul">
+				<li>浔阳江头夜送客，枫叶荻花秋瑟瑟。</li>
+				<li>主人下马客在船，举酒欲饮无管弦。</li>
+				<li>醉不成欢惨将别，别时茫茫江浸月。</li>
+				<li>忽闻水上琵琶声，主人忘归客不发。</li>
+				<li>寻声暗问弹者谁？琵琶声停欲语迟。</li>
+				<li>移船相近邀相见，添酒回灯重开宴。</li>
+				<li>千呼万唤始出来，犹抱琵琶半遮面。</li>
+				<li>转轴拨弦三两声，未成曲调先有情。</li>
+				<li>弦弦掩抑声声思，似诉平生不得志。</li>
+				<li>低眉信手续续弹，说尽心中无限事。</li>
+				<li>浔阳江头夜送客，枫叶荻花秋瑟瑟。</li>
+				<li>主人下马客在船，举酒欲饮无管弦。</li>
+				<li>醉不成欢惨将别，别时茫茫江浸月。</li>
+				<li>忽闻水上琵琶声，主人忘归客不发。</li>
+				<li>寻声暗问弹者谁？琵琶声停欲语迟。</li>
+				<li>移船相近邀相见，添酒回灯重开宴。</li>
+				<li>千呼万唤始出来，犹抱琵琶半遮面。</li>
+				<li>转轴拨弦三两声，未成曲调先有情。</li>
+				<li>弦弦掩抑声声思，似诉平生不得志。</li>
+				<li>低眉信手续续弹，说尽心中无限事。</li>
+			</ul>
+		</div>
+		<div id="btn-group">
+			<button>快速</button>
+			<button>中速</button>
+			<button>慢速</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var oUl = document.getElementById("ul"),
+					aLi = oUl.getElementsByTagName("li"),
+					aBtn = document.getElementsByTagName("button");
+					scrollSpeed = 50;
+					for(var i=0;i<aBtn.length;i++){
+						aBtn[i].onclick = (function(i){
+							return function(){
+								switch(i){
+									case 0:
+									scrollSpeed = 20;
+									break;
+									case 2:
+									scrollSpeed = 100;
+									break;
+									default:
+									scrollSpeed = 50;
+								}
+							}
+						})(i)
+					}
+					//自动执行
+					function auto(){
+						move(oUl,"marginTop",-20,-1,function(){
+							oUl.appendChild(oUl.children[0]);
+							oUl.style.marginTop = 0;
+							auto();
+						});
+					}
+					auto();
+					//运动函数
+					function move(obj,attr,target,speed,fn){
+						clearInterval()
+						obj.timer = setInterval(function(){
+							var cur = parseInt(getCss(obj,attr)),
+								stop = true;
+							if(target < cur){
+								stop = false;
+							}
+							obj.style[attr] = speed + cur +"px";
+							if(stop){
+								clearInterval(obj.timer);
+								obj.timer = null;
+								//fn && fn.call(obj);
+								fn();
+							}
+						},scrollSpeed);
+					}
+					//获取css
+					function getCss(obj,attr){
+						if(obj.currentStyle){
+							return obj.currentStyle[attr];
+						}else{
+							return getComputedStyle(obj,null)[attr];
+						}
+					}
+			})()
+		}
+		
+	</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标移入半透明</title>
+	</head>
+	<body>
+		<div class="wrap">
+			<img src="img/samll.jpg" alt class="img" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var oImg = document.getElementsByTagName("img")[0];
+				oImg.onmouseover = function(){
+					fade(this,30);
+				}
+				oImg.onmouseout = function(){
+					fade(this,100);
+				}
+				function css(obj,attr){
+					if(obj.currentStyle){
+						return obj.currentStyle[attr];
+					}else{
+						return getComputedStyle(obj)[attr];
+					}
+				}
+				function fade(obj,target){
+					clearInterval(obj.timer);
+					obj.timer = setInterval(function(){
+						var speed = 0,
+							stop = true;
+							cur = css(obj,"opacity")*100;
+						speed = (target-cur)/8;
+						speed = speed>0?Math.ceil(speed):Math.floor(speed);
+						cur += speed;
+						if(cur != target){
+							stop = false;
+						}
+						obj.style.opacity = cur/100;
+						//兼容ie6需要前面取filter的值
+						//obj.style.filter = "alpha(opacity = "+ cur +")";
+						if(stop){
+							clearInterval(obj.timer);
+							obj.timer = null;
+						}
+					},30)
+				}
+			})()
+		}
+	</script>
+</html>

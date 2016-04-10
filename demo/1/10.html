@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>下拉菜单的添加和删除</title>
+		<style type="text/css">
+			.form-group{
+				margin-bottom: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<form class="form">
+			<div class="form-group">
+				<input type="text" placeholder="输入下拉菜单项"/>
+				<button>点击添加</button>
+			</div>
+			<div class="form-group">
+				<select class="select">
+					<option>美国</option>
+					<option>中国</option>
+					<option>日本</option>
+				</select>
+				<button>点击删除当前的下拉项</button>
+			</div>
+		</form>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			(function(){
+				var oForm = document.getElementsByTagName("form")[0],
+					oInput = oForm.getElementsByTagName("input")[0],
+					aBtn = oForm.getElementsByTagName("button"),
+					oSelect = oForm.getElementsByTagName("select")[0],
+					aOption = oSelect.getElementsByTagName("option");
+				addEvent();
+				function addEvent(){
+					aBtn[0].onclick = function(){
+						if(!oInput.value){
+							alert("输入选项不能为空");
+						}else if(!noRepeat(oInput.value,aOption)){
+							alert("输入选项不能重复");
+						}else{
+							oSelect.innerHTML  += "<option>"+ oInput.value +"</option>";
+						}
+						return false;
+					}
+					aBtn[1].onclick = function(){
+						oSelect.remove(oSelect.selectedIndex);
+						return false;
+					}
+				}
+				function noRepeat(str,arr){
+					for(var i=0;i<arr.length;i++){
+						if(str == arr[i].innerText){
+							return false;
+						}
+					}
+					return true;
+				}
+			})();
+		}
+	</script>
+</html>

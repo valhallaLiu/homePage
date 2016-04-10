@@ -1,0 +1,106 @@
+#G-lightbox-mask{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+    z-index: 999;
+    display: none;
+}
+#G-lightbox-popup{
+    position: fixed;
+    width: 600px;
+    left: 50%;
+    top:100px;
+    margin-left: -300px;
+    z-index: 1000;
+    background-color: #000000;
+    display: none;
+    .lightbox-pic-view{
+        position: relative;
+        border:5px solid #fff;
+        border-radius: 3px;
+        overflow: hidden;
+        background: url(../img/icon/loader.gif) no-repeat center center;
+    }
+    .lightbox-btn{
+        position: absolute;
+        top: 0;
+        width: 40%;
+        height: 100%;
+        z-index: 1;
+        background: url(../img/icon/tansparentPoint.png);
+    }
+    .lightbox-prev-btn{
+        left: 0;
+    }
+    .lightbox-next-btn{
+        right: 0;
+    }
+    .lightbox-prev-btn-show{
+        background-image: url(../img/icon/prev.png);
+        background-repeat: no-repeat;
+        background-position: left;
+        cursor: pointer;
+    }
+    .lightbox-next-btn-show{
+        background-image: url(../img/icon/next.png);
+        background-repeat: no-repeat;
+        background-position: right;
+        cursor: pointer;
+    }
+    .lightbox-pic-caption{
+        position: relative;
+        margin: 0 5px;
+        margin-top: -60px;
+        z-index: 2;
+        .lightbox-caption-area{
+            padding: 10px 5px;
+            color: #FFFFFF;
+            background-color: rgba(0,0,0,0.3);
+            background: url(../img/icon/opacity.png);
+        }
+        .lightbox-of-index{
+            color: #999;
+        }
+        .lightbox-close-btn{
+            position: absolute;
+            top: 13px;
+            right: 10px;
+            width: 27px;
+            height: 27px;
+            background: url(../img/icon/close.png) no-repeat center center;
+            cursor: pointer;
+        }
+    }
+}
+//当页面为小屏幕时
+@media screen and (max-width:960px){
+    #G-lightbox-mask{
+        opacity: 0.9;
+    }
+    #G-lightbox-popup{
+        background-color: transparent;
+        .lightbox-pic-view{
+            border: none;
+            border-radius: 0;
+        }
+        .lightbox-btn{
+            visibility: hidden;
+        }
+        .lightbox-pic-caption{
+            .lightbox-caption-area{
+                visibility: hidden;
+            }
+            .lightbox-of-index{
+                visibility: hidden;
+            }
+            .lightbox-close-btn{
+                right: 30px;
+            }
+        }
+    }
+}
