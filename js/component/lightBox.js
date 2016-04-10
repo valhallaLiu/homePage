@@ -336,7 +336,7 @@ define(function(){
 		}
 	};
 	//扩展方法到windows上
-	window["LightBox"] = LightBox;
+	window.lightBox = lightBox;
 })
 
 

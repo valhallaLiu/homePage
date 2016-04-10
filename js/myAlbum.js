@@ -107,6 +107,7 @@ require(["jquery","getPosition","lightbox","deviceType"],function($,getPosition,
 		//将容器的高度设置为所有图片的高度
 		container.height(arr[arr.length-1].top + arr[arr.length-1].height);
 	}
+	
 	$(function(){
 		//绑定点击事件
 		choosePicType();
@@ -114,12 +115,12 @@ require(["jquery","getPosition","lightbox","deviceType"],function($,getPosition,
 		render();
 		//lightbox插件
 		if(deviceType.isMobile){
-			var lb = new LightBox({
+			var lb = new lightBox({
 				speed:"slow",
 				scale:1.1
 			})
 		}else{
-			var lb = new LightBox({
+			var lb = new lightBox({
 				speed:"slow",
 				scale:0.8
 			})

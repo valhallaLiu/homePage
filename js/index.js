@@ -8,7 +8,7 @@ require.config({
 	paths:{
 		jquery:"libs/jquery-1.11.3.min",
 		deviceType:"component/deviceType",
-		'jquery.fn.lazyload':"libs/jquery.lazyload"
+		'jquery.fn.lazyload':"libs/jquery.lazyload",
 	}
 });
 require(["jquery","deviceType"],function($,deviceType){
@@ -17,14 +17,6 @@ require(["jquery","deviceType"],function($,deviceType){
 	var sectionCount = $("section").size();
 	//初始化页数为第一页
 	var index = 1;
-	//手机端和pad端的判断
-/*	var ua = navigator.userAgent,
-		ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
-	    isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
-	    isAndroid = ua.match(/(Android)\s+([\d.]+)/),
-	    isMobile = isIphone || isAndroid;*/
-	//*******************************页面整体**********************
-	
 	//点击向下按钮，更改页面
 	function btnClick(){
 		$(".next-button").click(function(){
@@ -232,6 +224,4 @@ require(["jquery","deviceType"],function($,deviceType){
 		//技能页效果
 	})
 });
-
-
 //页面扔可以对index的判断进行重构优化，不需要在滚动、触摸、按钮的时候，都进行一次index的数量判断
